@@ -1,0 +1,74 @@
+OduOse - GUIA PARA PÔR TUDO NO AR (site + domínio + e-mail + contas de cliente)
+================================================================================
+Tempo total: cerca de 2 horas de trabalho, no computador. O único tempo de espera é o do domínio
+(de minutos até um dia). Por isso comece pelo passo 1.
+
+PASSO 1 - COMPRAR O DOMÍNIO (10 min)
+- Compre oduose.pt (ou .com) num registo à sua escolha: dominios.pt, PTisp, Namecheap, GoDaddy ou Cloudflare.
+- Para .pt, o registo pode pedir NIF e dados do titular. Confirme o preço (o preço do 1.º ano e da renovação).
+- Guarde o acesso ao painel do registo: vai precisar dele nos passos 5 e 7 (DNS).
+
+PASSO 2 - COLOCAR O SITE NO AR (15 min)
+- github.com: crie conta e um repositório "oduose-site" (privado). "Add file > Upload files":
+  envie TODO o conteúdo da pasta oduose_site (ficheiros e a pasta fotos).
+- netlify.com: Add new site > Import an existing project > GitHub > oduose-site. Deixe Build command
+  e Publish directory vazios. Deploy. O site fica em nome.netlify.app.
+
+PASSO 3 - CONTAS DE CLIENTE E PEDIDOS (20 min)
+- Siga as partes B do LEIA-ME.txt (Firebase): autenticação por e-mail, base de dados na Europa,
+  regras (firestore.rules), colar a configuração em admin.html > Definições.
+- Em Firebase > Authentication > Settings > Authorized domains: junte nome.netlify.app e,
+  mais tarde, oduose.pt e www.oduose.pt.
+
+PASSO 4 - PAINEL PELO TELEMÓVEL (10 min)
+- Token do GitHub e Publicar no admin.html (parte C do LEIA-ME.txt).
+- Em Definições, preencha: WhatsApp, PayPal, MB WAY, IBAN, e-mail, telefone, horário, nome legal, NIF, morada.
+
+PASSO 5 - LIGAR O DOMÍNIO AO SITE (10 min + espera)
+- Netlify > Domain management > Add a domain > oduose.pt. Aceite adicionar também o www.
+- No painel DNS do registo (ou do Cloudflare, se usar o DNS dele) crie:
+    Registo A      nome @ (ou vazio)   valor 75.2.60.5
+        (se o seu DNS tiver ALIAS/ANAME/CNAME flattening, pode usar ALIAS para apex-loadbalancer.netlify.com)
+    Registo CNAME  nome www            valor nome-do-seu-site.netlify.app
+  Estes valores vêm da documentação do Netlify; confirme em Netlify > Domain management > "Check DNS configuration",
+  que mostra os valores exatos para o seu site.
+- Pode demorar de minutos até cerca de um dia. Quando o Netlify validar, o HTTPS (cadeado) ativa sozinho.
+- Depois, em Netlify > Domain management, defina oduose.pt (ou www) como domínio principal.
+
+PASSO 6 - AJUSTES FINAIS NO DOMÍNIO (5 min)
+- Firebase > Authorized domains: junte oduose.pt e www.oduose.pt.
+- Ficheiros sitemap.xml e robots.txt: troque www.oduose.pt pelo seu endereço (pode editar no GitHub, no ícone do lápis).
+
+PASSO 7 - E-MAIL COM O SEU DOMÍNIO (20 min)  (ex.: geral@oduose.pt)
+Escolha UMA das opções:
+ A) Caixa de correio grátis (receber e enviar): Zoho Mail, plano gratuito.
+    - Limites a verificar na altura da inscrição: um só domínio, poucos utilizadores, e o plano gratuito pode ser
+      só pela web (sem Outlook/telemóvel por IMAP) e depender da região.
+    - zoho.com/mail > plano gratuito > Adicionar domínio > verificar com um registo TXT ou CNAME no seu DNS.
+    - Crie os registos MX, SPF (TXT) e DKIM (TXT) que o Zoho mostrar. Confirme também o registo DMARC (TXT).
+ B) Só receber, grátis: reencaminhamento (Cloudflare Email Routing ou ImprovMX).
+    - Tudo o que chega a geral@oduose.pt vai para o seu Gmail. Para responder com o endereço do domínio
+      é preciso configurar "enviar como" com um servidor SMTP, que não vem incluído.
+ C) Profissional, com custo mensal por utilizador: Google Workspace ou Microsoft 365 (mais simples e com apps
+    para telemóvel). Siga o assistente do fornecedor e crie os registos MX/SPF/DKIM que ele indicar.
+- Os registos MX não entram em conflito com os registos A/CNAME do site (passo 5).
+- Depois, em admin.html > Definições, ponha o novo e-mail (geral@oduose.pt) e publique.
+- Teste enviando e recebendo um e-mail de e para o seu Gmail. Se for parar ao spam, confirme SPF, DKIM e DMARC.
+- Os e-mails de "repor palavra-passe" são enviados pelo Firebase, com um remetente genérico do projeto.
+  Em Authentication > Templates pode traduzir o texto e, mais tarde, configurar um remetente próprio.
+
+PASSO 8 - TESTE COMPLETO ANTES DE DIVULGAR (15 min)
+ 1. Abra https://www.oduose.pt no telemóvel: tem cadeado e os produtos aparecem?
+ 2. Crie uma conta de cliente com outro e-mail, guarde a morada, entre e saia.
+ 3. Faça um pedido e pague 1 € de teste (PayPal ou MB WAY). Confirma que o pedido chega por WhatsApp
+    e aparece em admin.html > Pedidos?
+ 4. Mude o estado do pedido para Enviado e confirme que o cliente o vê em "A minha conta".
+ 5. Mude um preço e uma foto no admin.html > Publicar, e veja o site atualizar em cerca de 1 minuto.
+ 6. Peça a recuperação de palavra-passe e confirme que o e-mail chega.
+
+ANTES DE ABRIR AO PÚBLICO
+- Preencha os dados da empresa (Definições). Peça a um advogado/contabilista que reveja Termos,
+  Devoluções, Privacidade e Litígios.
+- O pagamento continua manual: só envie a encomenda depois de ver o dinheiro na sua conta.
+- Guarde em local seguro: palavra-passe do registo do domínio, do GitHub, do Netlify, do Firebase,
+  o token do painel e a conta de dono.

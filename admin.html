@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>OduOse – Painel de administração</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--bg:#f4f2f8;--p:#fff;--t:#22213d;--m:#66647f;--l:#e2dfee;--b:#2a7fb8;--s:#0a84d6;--r:#d93636}
+@media(prefers-color-scheme:dark){:root{--bg:#14171c;--p:#1d2128;--t:#e8e8e8;--m:#9aa0a8;--l:#2c313a;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:16px/1.5 system-ui,Roboto,sans-serif}
+header{background:var(--b);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:5}header b{font-size:1.2rem}
+nav{display:flex;gap:6px;margin-top:10px}nav button{flex:1;border:0;border-radius:8px;padding:10px;font:600 .95rem inherit;background:#ffffff33;color:#fff;cursor:pointer}nav button.on{background:#fff;color:var(--b)}
+main{max-width:860px;margin:0 auto;padding:16px}
+.card{background:var(--p);border:1px solid var(--l);border-radius:12px;padding:14px;margin-bottom:12px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--l);border-radius:8px;background:var(--bg);color:var(--t);font:inherit;margin:4px 0 10px}
+label{font-size:.85rem;color:var(--m);font-weight:600}label.ck{display:flex;gap:8px;align-items:center;color:var(--t);font-size:1rem;margin-bottom:8px}label.ck input{width:auto;margin:0}
+.btn{background:var(--s);color:#fff;border:0;border-radius:8px;padding:12px 16px;font:700 1rem inherit;cursor:pointer}.btn.g{background:var(--p);color:var(--t);border:1px solid var(--l)}.btn.d{background:var(--r)}
+.row{display:flex;gap:12px;align-items:center}.row>div{flex:1;min-width:0}
+.th{width:60px;height:60px;border-radius:8px;background:#ddd center/cover;flex:none}
+.tg{font-size:.75rem;padding:2px 8px;border-radius:99px;background:var(--l);margin-right:4px}
+#md{position:fixed;inset:0;background:#000a;z-index:20;display:none;overflow:auto;padding:12px}#md.on{display:block}
+#md .card{max-width:560px;margin:0 auto}
+.bn{background:#fff3cd;color:#664d03;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:.9rem}
+pre{white-space:pre-wrap;background:var(--bg);padding:10px;border-radius:8px;font-size:.85rem;max-height:200px;overflow:auto}
+.hint{color:var(--m);font-size:.85rem;margin:0 0 10px}
+</style></head><body>
+<header><b>OduOse · Painel</b><nav><button data-v="pr" class="on">Produtos</button><button data-v="df">Definições</button><button data-v="pb">Publicar</button><button data-v="od">Pedidos</button></nav></header>
+<main>
+<div id="dft" class="bn" hidden>Tem alterações ainda não publicadas (guardadas neste dispositivo). <button class="btn g" id="dsc">Descartar</button></div>
+<section id="pr"><div class="row" style="margin-bottom:12px"><input id="q" placeholder="Pesquisar produto" style="margin:0"><button class="btn" id="nw" style="white-space:nowrap">+ Novo</button></div><div id="ls"></div></section>
+<section id="df" hidden><div class="card"><label>WhatsApp (com indicativo, sem +)</label><input id="c_wa" inputmode="numeric"><label>Utilizador PayPal.me</label><input id="c_paypal"><label>Número MB WAY</label><input id="c_mbway"><label>IBAN</label><input id="c_iban"><label>E-mail</label><input id="c_email" type="email"><label>Telefone (rodapé)</label><input id="c_tel"><label>Horário de atendimento</label><input id="c_horario"><label>Nome legal da empresa</label><input id="c_emp"><label>NIF</label><input id="c_nif"><label>Morada da sede</label><input id="c_morada"><label>Ligação Firebase (contas de cliente e pedidos): cole aqui a configuração do Firebase</label><textarea id="c_fb" rows="5" placeholder="const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"></textarea><p class="hint" id="fbs"></p><button class="btn" id="sc">Guardar definições</button></div></section>
+<section id="od" hidden><div id="odb"></div></section>
+<section id="pb" hidden>
+<div class="card"><h3 style="margin-top:0">Publicar direto (recomendado)</h3><p class="hint">Envia as alterações e as fotos para o GitHub, e o site atualiza sozinho em cerca de 1 minuto. Configuração única, veja o LEIA-ME.</p><label>Repositório (utilizador/nome)</label><input id="gr" placeholder="joao/oduose-site"><label>Token do GitHub</label><input id="gt" type="password" autocomplete="off"><label>Ramo</label><input id="gb" value="main"><label class="ck"><input type="checkbox" id="gk" checked> Lembrar neste dispositivo</label><button class="btn" id="go">Publicar agora</button><pre id="lg" hidden></pre></div>
+<div class="card"><h3 style="margin-top:0">Ou descarregar o ficheiro</h3><p class="hint">Descarrega o produtos.js (com as fotos incluídas), substitui o ficheiro na pasta do site e volta a enviar a pasta para o alojamento.</p><button class="btn g" id="dl">Descarregar produtos.js</button></div></section>
+</main>
+<div id="md"><div class="card" id="fm"></div></div>
+<script src="produtos.js"></script>
+<script>window.DADOS=window.DADOS||{
+ "cfg": {
+  "wa": "351900000000",
+  "paypal": "O_SEU_UTILIZADOR",
+  "mbway": "910 000 000",
+  "iban": "PT50 0000 0000 0000 0000 0000 0",
+  "email": "geral@oduose.pt",
+  "tel": "(+351) 90 000 00 00",
+  "horario": "Dias úteis, das 9.30 às 16.00h",
+  "emp": "[Nome legal da empresa]",
+  "nif": "[NIF]",
+  "morada": "[Morada da sede]",
+  "firebase": {}
+ },
+ "prod": [
+  {
+   "id": 1,
+   "n": "Guia de Oxalá",
+   "t": "Umbanda",
+   "ty": "Guias e pulseiras",
+   "d": "Colar de contas brancas, 1,20 m.",
+   "p": 18.0,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "beads",
+   "a": "#f6f6f6",
+   "c": "#8fa6cf"
+  },
+  {
+   "id": 2,
+   "n": "Guia de Ogum",
+   "t": "Umbanda",
+   "ty": "Guias e pulseiras",
+   "d": "Colar de contas azul-escuro, 1,20 m.",
+   "p": 18.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "beads",
+   "a": "#1d3f8f",
+   "c": "#c9d6ee"
+  },
+  {
+   "id": 3,
+   "n": "Vela de 7 dias",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Vela em copo, várias cores.",
+   "p": 6.5,
+   "pc": 20,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "candle",
+   "a": "#c0392b",
+   "c": "#f6e3b0"
+  },
+  {
+   "id": 4,
+   "n": "Defumador de ervas",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Alecrim, arruda e guiné, 100 g.",
+   "p": 9.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "smoke",
+   "a": "#2E7D5B",
+   "c": "#d4e8dc"
+  },
+  {
+   "id": 5,
+   "n": "Imagem de Preto-Velho",
+   "t": "Umbanda",
+   "ty": "Imagens",
+   "d": "Resina pintada à mão, 20 cm.",
+   "p": 34.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "statue",
+   "a": "#8a8f9c",
+   "c": "#e2ddd4"
+  },
+  {
+   "id": 6,
+   "n": "Guia de Iemanjá",
+   "t": "Candomblé",
+   "ty": "Guias e pulseiras",
+   "d": "Contas transparentes e azuis.",
+   "p": 20.0,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "beads",
+   "a": "#6fb3e0",
+   "c": "#dcebf7"
+  },
+  {
+   "id": 7,
+   "n": "Pulseira de Oxum",
+   "t": "Candomblé",
+   "ty": "Guias e pulseiras",
+   "d": "Contas douradas, ajustável.",
+   "p": 14.0,
+   "pc": 22,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "ring",
+   "a": "#e0a800",
+   "c": "#f7edc4"
+  },
+  {
+   "id": 8,
+   "n": "Ibiri de Nanã",
+   "t": "Candomblé",
+   "ty": "Ferramentas",
+   "d": "Ferramenta em palha da costa.",
+   "p": 42.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "ibiri",
+   "a": "#b08a4a",
+   "c": "#e6d9ec"
+  },
+  {
+   "id": 9,
+   "n": "Oxê de Xangô",
+   "t": "Candomblé",
+   "ty": "Ferramentas",
+   "d": "Machado duplo em madeira, 25 cm.",
+   "p": 38.0,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "axe",
+   "a": "#b3261e",
+   "c": "#f4d6d2"
+  },
+  {
+   "id": 10,
+   "n": "Quartinha de barro",
+   "t": "Candomblé",
+   "ty": "Ferramentas",
+   "d": "Para água e oferendas, 400 ml.",
+   "p": 12.0,
+   "pc": 40,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "jar",
+   "a": "#b5683d",
+   "c": "#f0dcc9"
+  },
+  {
+   "id": 11,
+   "n": "Jogo de búzios",
+   "t": "Candomblé",
+   "ty": "Adivinhação",
+   "d": "16 búzios selecionados com saquinho.",
+   "p": 28.0,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "shells",
+   "a": "#fbf7ee",
+   "c": "#6b5a48"
+  },
+  {
+   "id": 12,
+   "n": "Opelé de Ifá",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "Cadeia de adivinhação, 8 sementes.",
+   "p": 55.0,
+   "pc": 15,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "chain",
+   "a": "#2E7D5B",
+   "c": "#d4e8dc"
+  },
+  {
+   "id": 13,
+   "n": "Idẹ de Orunmilá",
+   "t": "Ifá",
+   "ty": "Guias e pulseiras",
+   "d": "Pulseira verde e amarela.",
+   "p": 16.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "ring",
+   "a": "#2E7D5B",
+   "c": "#f6edb8"
+  },
+  {
+   "id": 14,
+   "n": "Tábua de Ifá (Opon)",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "Madeira entalhada, 30 cm.",
+   "p": 68.0,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "board",
+   "a": "#8a5a2f",
+   "c": "#ecdfc8"
+  },
+  {
+   "id": 15,
+   "n": "Iyerosun",
+   "t": "Ifá",
+   "ty": "Velas e ervas",
+   "d": "Pó de adivinhação, 50 g.",
+   "p": 10.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "powder",
+   "a": "#f1e1b0",
+   "c": "#d9c7a8"
+  },
+  {
+   "id": 16,
+   "n": "Velão Abre Caminhos",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Velão grande para abertura de caminhos.",
+   "p": 8.5,
+   "pc": 14,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "candle",
+   "a": "#2E9C6A",
+   "c": "#d4e8dc"
+  },
+  {
+   "id": 17,
+   "n": "Vela de Volteio",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Vela amarela para atrair boas energias.",
+   "p": 6.95,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "candle",
+   "a": "#e0a800",
+   "c": "#f6edb8"
+  },
+  {
+   "id": 18,
+   "n": "Pulseira dos 7 Nós",
+   "t": "Umbanda",
+   "ty": "Guias e pulseiras",
+   "d": "Fio vermelho com sete nós, proteção.",
+   "p": 4.95,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "ring",
+   "a": "#c0392b",
+   "c": "#f2d7d4"
+  },
+  {
+   "id": 19,
+   "n": "Água de Cheiro de Oxum",
+   "t": "Candomblé",
+   "ty": "Banhos e perfumes",
+   "d": "Perfume ritual, frasco de 270 ml.",
+   "p": 9.95,
+   "pc": 20,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "bottle",
+   "a": "#e8c46a",
+   "c": "#f7edc4"
+  },
+  {
+   "id": 20,
+   "n": "Banho de Ervas de Oxalá",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Mistura de ervas para banho, 100 g.",
+   "p": 5.5,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "powder",
+   "a": "#6aa84f",
+   "c": "#e2efd8"
+  },
+  {
+   "id": 21,
+   "n": "Cristal Ametista",
+   "t": "Umbanda",
+   "ty": "Amuletos e cristais",
+   "d": "Cristal em bruto, proteção e equilíbrio.",
+   "p": 7.9,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "crystal",
+   "a": "#9b6fd1",
+   "c": "#e6dcf3"
+  },
+  {
+   "id": 22,
+   "n": "Cabaça de Ifá (Igba)",
+   "t": "Ifá",
+   "ty": "Ferramentas",
+   "d": "Cabaça decorada, 20 cm.",
+   "p": 32.0,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "",
+   "k": "jar",
+   "a": "#d9a441",
+   "c": "#f3e6c8"
+  },
+  {
+   "id": 23,
+   "n": "Ikin de Ifá",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "16 sementes de palmeira selecionadas.",
+   "p": 24.0,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "",
+   "k": "shells",
+   "a": "#8a5a2f",
+   "c": "#ecdfc8"
+  }
+ ]
+};</script>
+<script>
+var $=function(i){return document.getElementById(i)},D,ED=null;
+try{var s=localStorage.getItem("oduose_draft");D=s?JSON.parse(s):null}catch(e){D=null}
+if(D)$("dft").hidden=false;else D=JSON.parse(JSON.stringify(window.DADOS));
+function sv(){try{localStorage.setItem("oduose_draft",JSON.stringify(D));$("dft").hidden=false}catch(e){alert("Sem espaço para guardar o rascunho neste dispositivo. Publique agora ou use fotos mais pequenas.")}}
+function eur(v){return Number(v).toFixed(2).replace(".",",")+" €"}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+document.querySelector("nav").onclick=function(e){var v=e.target.dataset.v;if(!v)return;["pr","df","pb","od"].forEach(function(k){$(k).hidden=k!==v});Array.prototype.forEach.call(this.children,function(b){b.classList.toggle("on",b.dataset.v===v)});if(v=="od")od()};
+function ls(){var q=$("q").value.toLowerCase(),h="";D.prod.filter(function(p){return!q||(p.n+p.t+p.ty).toLowerCase().indexOf(q)>-1}).forEach(function(p){
+h+='<div class="card row"><div class="th" style="background-color:'+esc(p.c||"#ddd")+(p.img?';background-image:url('+esc(p.img)+')':'')+'"></div><div><b>'+esc(p.n)+'</b><br><span style="color:var(--m)">'+esc(p.t)+' · '+esc(p.ty)+'</span><br>'+eur(p.p)+(p.pc?' <span class="tg">-'+p.pc+'%</span>':'')+(p.nv?'<span class="tg">Novo</span>':'')+(p.esg?'<span class="tg">Esgotado</span>':'')+(p.img?'':'<span class="tg">Sem foto</span>')+'</div><button class="btn g" data-e="'+p.id+'">Editar</button></div>'});
+$("ls").innerHTML=h||'<p class="hint">Nenhum produto.</p>'}
+$("q").oninput=ls;$("ls").onclick=function(e){if(e.target.dataset.e)ed(+e.target.dataset.e)};$("nw").onclick=function(){ed(0)};
+function types(){var t={};D.prod.forEach(function(p){t[p.ty]=1});return Object.keys(t)}
+function ed(id){var p=id?D.prod.filter(function(x){return x.id===id})[0]:{id:0,n:"",t:"Umbanda",ty:"",d:"",p:0,pc:0,nv:true,esg:false,img:"",k:"box",a:"#8c7bf0",c:"#e6e0f5"};ED=JSON.parse(JSON.stringify(p));
+$("fm").innerHTML='<h3 style="margin-top:0">'+(id?"Editar produto":"Novo produto")+'</h3><div class="th" id="pv" style="width:100%;height:220px;margin-bottom:8px;background-color:'+esc(ED.c)+(ED.img?';background-image:url('+esc(ED.img)+')':'')+'"></div><input type="file" id="ft" accept="image/*"><button class="btn g" id="rf" style="margin-bottom:10px">Remover foto</button><label>Nome</label><input id="f_n" value="'+esc(ED.n)+'"><label>Tradição</label><select id="f_t">'+["Umbanda","Candomblé","Ifá"].map(function(t){return'<option'+(t===ED.t?' selected':'')+'>'+t+'</option>'}).join("")+'</select><label>Tipo de artigo (ex.: Velas e ervas)</label><input id="f_ty" list="tl" value="'+esc(ED.ty)+'"><datalist id="tl">'+types().map(function(t){return'<option value="'+esc(t)+'">'}).join("")+'</datalist><label>Descrição</label><textarea id="f_d" rows="3">'+esc(ED.d)+'</textarea><label>Preço (€)</label><input id="f_p" inputmode="decimal" value="'+ED.p+'"><label>Desconto (%, 0 = sem desconto)</label><input id="f_pc" inputmode="numeric" value="'+ED.pc+'"><label class="ck"><input type="checkbox" id="f_nv"'+(ED.nv?' checked':'')+'> Novidade</label><label class="ck"><input type="checkbox" id="f_esg"'+(ED.esg?' checked':'')+'> Esgotado</label><div class="row"><button class="btn" id="fs">Guardar</button><button class="btn g" id="fc">Cancelar</button>'+(id?'<button class="btn d" id="fd">Apagar</button>':'')+'</div>';
+$("md").classList.add("on");
+$("ft").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement("canvas");c.width=c.height=800;var z=Math.min(im.width,im.height);c.getContext("2d").drawImage(im,(im.width-z)/2,(im.height-z)/2,z,z,0,0,800,800);ED.img=c.toDataURL("image/jpeg",.82);$("pv").style.backgroundImage="url("+ED.img+")"};im.onerror=function(){alert("Não foi possível ler esta imagem.")};im.src=r.result};r.readAsDataURL(f)};
+$("rf").onclick=function(){ED.img="";$("pv").style.backgroundImage="none";$("ft").value=""};
+$("fc").onclick=function(){$("md").classList.remove("on")};
+$("fs").onclick=function(){var n=$("f_n").value.trim(),pr=parseFloat(String($("f_p").value).replace(",","."));if(!n||isNaN(pr)||pr<0){alert("Indique o nome e um preço válido.");return}
+ED.n=n;ED.t=$("f_t").value;ED.ty=$("f_ty").value.trim()||"Outros";ED.d=$("f_d").value.trim();ED.p=pr;ED.pc=Math.max(0,Math.min(90,parseInt($("f_pc").value)||0));ED.nv=$("f_nv").checked;ED.esg=$("f_esg").checked;
+if(!ED.id){ED.id=D.prod.reduce(function(m,x){return Math.max(m,x.id)},0)+1;D.prod.unshift(ED)}else{D.prod=D.prod.map(function(x){return x.id===ED.id?ED:x})}
+sv();ls();$("md").classList.remove("on")};
+if($("fd"))$("fd").onclick=function(){if(confirm("Apagar este produto?")){D.prod=D.prod.filter(function(x){return x.id!==ED.id});sv();ls();$("md").classList.remove("on")}}}
+var CF=["wa","paypal","mbway","iban","email","tel","horario","emp","nif","morada"];
+function cf(){CF.forEach(function(k){$("c_"+k).value=D.cfg[k]||""});var f=D.cfg.firebase;$("fbs").textContent=f&&f.apiKey?"Ligado ao projeto "+f.projectId+". Para trocar, cole uma nova configuração.":"Ainda não ligado."}
+$("sc").onclick=function(){CF.forEach(function(k){D.cfg[k]=$("c_"+k).value.trim()});var fb={};$("c_fb").value.replace(/"?(\w+)"?\s*:\s*"([^"]*)"/g,function(_,k,v){fb[k]=v});if(fb.apiKey)D.cfg.firebase=fb;$("c_fb").value="";cf();sv();alert("Definições guardadas. Publique para as pôr no site.")};
+$("dsc").onclick=function(){if(confirm("Descartar as alterações não publicadas?")){try{localStorage.removeItem("oduose_draft")}catch(e){}location.reload()}};
+function ex(d){return"window.DADOS="+JSON.stringify(d,null,1)+";\n"}
+function b64(t){return btoa(unescape(encodeURIComponent(t)))}
+$("dl").onclick=function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([ex(D)],{type:"text/javascript"}));a.download="produtos.js";a.click()};
+function lg(m){var l=$("lg");l.hidden=false;l.textContent+=m+"\n"}
+async function put(repo,tok,br,path,c64,msg){var u="https://api.github.com/repos/"+repo+"/contents/"+path,h={Authorization:"Bearer "+tok,Accept:"application/vnd.github+json"},sha;
+var r=await fetch(u+"?ref="+encodeURIComponent(br),{headers:h});if(r.ok){var j=await r.json();sha=j.sha}else if(r.status===401||r.status===403)throw new Error("Token inválido ou sem permissão (Contents: Read and write).");else if(r.status===404&&path==="produtos.js"){var rr=await fetch("https://api.github.com/repos/"+repo,{headers:h});if(!rr.ok)throw new Error("Repositório não encontrado. Confirme o nome e o token.")}
+var b={message:msg,content:c64,branch:br};if(sha)b.sha=sha;var w=await fetch(u,{method:"PUT",headers:h,body:JSON.stringify(b)});if(!w.ok)throw new Error(path+": erro "+w.status)}
+$("go").onclick=async function(){var repo=$("gr").value.trim(),tok=$("gt").value.trim(),br=$("gb").value.trim()||"main";if(!repo||!tok){alert("Preencha o repositório e o token.");return}
+if($("gk").checked)try{localStorage.setItem("oduose_gh",JSON.stringify({r:repo,t:tok,b:br}))}catch(e){}else try{localStorage.removeItem("oduose_gh")}catch(e){}
+this.disabled=true;$("lg").textContent="";try{var C=JSON.parse(JSON.stringify(D));
+for(var i=0;i<C.prod.length;i++){var p=C.prod[i];if(p.img&&p.img.indexOf("data:")===0){var nm="fotos/p"+p.id+"-"+Date.now()+".jpg";lg("A enviar foto: "+p.n);await put(repo,tok,br,nm,p.img.split(",")[1],"Foto "+p.n);p.img=nm}}
+lg("A publicar produtos e definições...");await put(repo,tok,br,"produtos.js",b64(ex(C)),"Atualizar produtos");D=C;sv();ls();lg("Feito. O site atualiza em cerca de 1 minuto.")}catch(e){lg("Erro: "+e.message)}this.disabled=false};
+try{var g=JSON.parse(localStorage.getItem("oduose_gh")||"null");if(g){$("gr").value=g.r;$("gt").value=g.t;$("gb").value=g.b}}catch(e){}
+
+var EST=["Novo","Pago","Enviado","Concluído","Cancelado"];
+async function od(){var b=$("odb"),C=D.cfg.firebase;if(!C||!C.apiKey){b.innerHTML='<div class="card">Ligue primeiro o Firebase em Definições e publique. Veja o LEIA-ME.</div>';return}
+if(!window.FBA){b.innerHTML='<div class="card">A ligar ao Firebase… (guarde a configuração em Definições e recarregue esta página)</div>';return}
+if(!FBA.user()){b.innerHTML='<div class="card"><h3 style="margin-top:0">Entrar como dono da loja</h3><p class="hint" id="oe"></p><form id="olf"><input id="oe1" type="email" placeholder="E-mail" required><input id="op1" type="password" placeholder="Palavra-passe" required><button class="btn">Entrar</button></form></div>';return}
+b.innerHTML='<p class="hint">A carregar pedidos…</p>';
+try{var L=await FBA.all();L.sort(function(x,y){return(y.criado&&y.criado.toMillis?y.criado.toMillis():0)-(x.criado&&x.criado.toMillis?x.criado.toMillis():0)});
+b.innerHTML='<div class="row" style="margin-bottom:12px"><b>'+L.length+' pedidos</b><button class="btn g" data-oa="ref">Atualizar</button><button class="btn g" data-oa="out">Sair</button></div>'+(L.map(function(o){return'<div class="card"><b>'+esc(o.criado&&o.criado.toDate?o.criado.toDate().toLocaleString("pt-PT"):"")+'</b> — '+eur(o.total)+' · '+esc(o.pagamento)+'<br>'+esc(o.nome)+' · '+esc(o.telefone)+' · '+esc(o.email)+'<br><span style="color:var(--m)">'+esc(o.morada)+'</span><br>'+(o.itens||[]).map(function(i){return esc(i.q+"x "+i.n)}).join(", ")+'<br><label>Estado</label><select data-oid="'+esc(o.id)+'">'+EST.map(function(s){return'<option'+(s===o.estado?' selected':'')+'>'+s+'</option>'}).join("")+'</select></div>'}).join("")||'<div class="card">Ainda não há pedidos.</div>')}
+catch(e){b.innerHTML='<div class="card">Sem permissão para ver os pedidos. Esta conta tem de ser a do dono (veja o passo do UID no LEIA-ME).<br><button class="btn g" data-oa="out" style="margin-top:10px">Sair</button></div>'}}
+$("odb").onsubmit=async function(e){e.preventDefault();try{await FBA.login($("oe1").value.trim(),$("op1").value)}catch(x){$("oe").textContent="E-mail ou palavra-passe incorretos."}};
+$("odb").onclick=async function(e){var a=e.target.dataset.oa;if(a=="out")await FBA.out();if(a=="ref")od()};
+$("odb").onchange=async function(e){var id=e.target.dataset.oid;if(!id)return;try{await FBA.est(id,e.target.value)}catch(x){alert("Não foi possível atualizar o estado.")}};
+window.odr=function(){if(!$("od").hidden)od()};
+cf();ls();
+</script><script type="module">
+const C=((window.D||{}).cfg||{}).firebase;
+if(C&&C.apiKey){try{
+const B="https://www.gstatic.com/firebasejs/10.12.2/";
+const [A,AU,FS]=await Promise.all([import(B+"firebase-app.js"),import(B+"firebase-auth.js"),import(B+"firebase-firestore.js")]);
+const app=A.initializeApp(C),auth=AU.getAuth(app),db=FS.getFirestore(app);
+window.FBA={user:()=>auth.currentUser,login:(e,p)=>AU.signInWithEmailAndPassword(auth,e,p),out:()=>AU.signOut(auth),
+all:async()=>{const s=await FS.getDocs(FS.collection(db,"pedidos"));return s.docs.map(d=>Object.assign({id:d.id},d.data()))},
+est:(id,e)=>FS.updateDoc(FS.doc(db,"pedidos",id),{estado:e})};
+AU.onAuthStateChanged(auth,()=>{if(window.odr)window.odr()});
+}catch(e){console.error(e)}}
+</script>
+</body></html>

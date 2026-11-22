@@ -1,0 +1,58 @@
+OduOse - Site + Contas de cliente + Painel de administração
+===========================================================
+
+FICHEIROS
+- index.html ...... o site dos clientes (loja, carrinho, conta de cliente)
+- admin.html ...... o seu painel: produtos, preços, fotos, definições e PEDIDOS
+- produtos.js ..... os dados do site (o painel atualiza este ficheiro)
+- firestore.rules . regras de segurança da base de dados (passo 7)
+- fotos/ .......... fotografias dos produtos
+- favicon.svg, robots.txt, sitemap.xml
+- importacao/ ..... CSV de produtos para Shopify e WooCommerce
+
+O QUE O SITE FAZ
+- Clientes criam conta (e-mail + palavra-passe), entram, guardam nome/telemóvel/morada,
+  repõem a palavra-passe por e-mail e veem o histórico de pedidos em qualquer dispositivo.
+- Quem tem conta: o pedido fica guardado na base de dados (estado: Novo, Pago, Enviado...)
+  e segue também por WhatsApp. Quem não tem conta continua a poder comprar por WhatsApp.
+- Você vê todos os pedidos no painel (separador Pedidos) e muda o estado de cada um.
+- As palavras-passe são geridas pela Google (Firebase Authentication). Você nunca as vê.
+
+PARTE A - COLOCAR NO AR (GitHub + Netlify)
+1) Crie conta em github.com e um repositório novo (ex.: oduose-site, privado).
+   "Add file > Upload files": envie o CONTEÚDO desta pasta (ficheiros e pasta fotos).
+2) Crie conta em netlify.com > Add new site > Import an existing project > GitHub > oduose-site.
+   Build command e Publish directory vazios > Deploy. Fica em nome.netlify.app.
+3) Domínio próprio (opcional): compre em dominios.pt ou outro e ligue em Netlify > Domain management.
+
+PARTE B - ATIVAR AS CONTAS DE CLIENTE (Firebase, gratuito para esta dimensão de loja)
+4) Vá a console.firebase.google.com > Adicionar projeto (ex.: oduose). Pode desativar o Google Analytics.
+5) Autenticação: Build > Authentication > Get started > Sign-in method > Email/Password > Ativar.
+   Em Settings > Authorized domains, junte o seu endereço (nome.netlify.app e o seu domínio).
+6) Base de dados: Build > Firestore Database > Create database.
+   Escolha uma localização na Europa (ex.: eur3 ou europe-west) e o modo "Production".
+7) Regras: no Firestore > separador Rules, apague tudo e cole o conteúdo de firestore.rules > Publish.
+   (Por agora deixe o texto COLE_AQUI_O_UID_DO_DONO; muda no passo 9.)
+8) Ligação: Project settings (roda dentada) > Your apps > ícone Web "</>" > registe a app (ex.: oduose-web)
+   e copie o bloco "firebaseConfig". No admin.html > Definições, cole-o em "Ligação Firebase",
+   toque em Guardar definições e, em Publicar, "Publicar agora" (veja a Parte C).
+9) Conta de dono: abra o seu site, crie uma conta normal com o SEU e-mail. Depois, no Firebase,
+   Authentication > Users, copie o "User UID" dessa conta. Volte a Firestore > Rules, troque
+   COLE_AQUI_O_UID_DO_DONO por esse UID e faça Publish.
+   Depois, no admin.html > Pedidos, entre com esse e-mail e palavra-passe.
+10) E-mails de repor palavra-passe: Authentication > Templates > escolha o idioma Português.
+
+PARTE C - EDITAR PELO TELEMÓVEL (painel)
+11) GitHub > Settings > Developer settings > Personal access tokens > Fine-grained tokens > Generate.
+    Repository access: só o oduose-site. Permissions > Contents: Read and write. Copie o token.
+12) Abra o-seu-endereço/admin.html > Publicar: escreva utilizador/oduose-site, cole o token, "Publicar agora".
+    O site atualiza sozinho em cerca de 1 minuto.
+Sem GitHub: Publicar > "Descarregar produtos.js", substitua o ficheiro na pasta e volte a enviá-la.
+
+IMPORTANTE
+- Teste tudo: criar conta, entrar, guardar morada, fazer um pedido, ver o pedido no painel.
+- O pagamento continua manual (PayPal/MB WAY/transferência + WhatsApp): só envie depois de ver o dinheiro.
+- O token do GitHub e a palavra-passe do dono são chaves da sua loja: não os partilhe.
+- Os textos legais (termos, privacidade, devoluções) são modelos: peça revisão a um advogado.
+  Com contas de cliente, a política de privacidade passa a referir o Google (Firebase) automaticamente.
+- Se o Firebase falhar ou não estiver configurado, o site continua a funcionar sem contas.
