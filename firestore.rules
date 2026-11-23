@@ -4,7 +4,7 @@ service cloud.firestore {
 
     // Troque o texto abaixo pelo UID da sua conta de dono (ver LEIA-ME, passo 8)
     function dono() {
-      return request.auth != null && request.auth.uid == 'COLE_AQUI_O_UID_DO_DONO';
+      return request.auth != null && request.auth.uid == 'vFEWlhJapSfCTJzoGtSf00mlpwk1';
     }
 
     // Cada cliente só vê e altera os seus próprios dados
