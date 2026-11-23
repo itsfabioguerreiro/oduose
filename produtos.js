@@ -10,7 +10,14 @@ window.DADOS={
   "emp": "[Nome legal da empresa]",
   "nif": "[NIF]",
   "morada": "[Morada da sede]",
-  "firebase": {}
+  "firebase": {
+    "apiKey": "AIzaSyBwEL33mCAb0yJfFE20IZju5IRk0WBZiBM",
+    "authDomain": "oduose-b0133.firebaseapp.com",
+    "projectId": "oduose-b0133",
+    "storageBucket": "oduose-b0133.firebasestorage.app",
+    "messagingSenderId": "861099749019",
+    "appId": "1:861099749019:web:cdf5ca7aa9bfb281b3203e"
+  }": {}
  },
  "prod": [
   {
