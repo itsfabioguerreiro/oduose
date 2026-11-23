@@ -1,14 +1,14 @@
 window.DADOS={
  "cfg": {
-  "wa": "351900000000",
+  "wa": "351932098828",
   "paypal": "O_SEU_UTILIZADOR",
-  "mbway": "910 000 000",
+  "mbway": "932 098 828",
   "iban": "PT50 0000 0000 0000 0000 0000 0",
-  "email": "geral@oduose.pt",
-  "tel": "(+351) 90 000 00 00",
-  "horario": "Dias úteis, das 9.30 às 16.00h",
-  "emp": "[Nome legal da empresa]",
-  "nif": "[NIF]",
+  "email": "compras@oduose.pt",
+  "tel": "(+351) 932 098 828",
+  "horario": "Dias úteis, das 9.30 às 18.00h",
+  "emp": "[Odu Osé - Artigos Religiosos]",
+  "nif": "[518 435 210]",
   "morada": "[Morada da sede]",
   "firebase": {
     "apiKey": "AIzaSyBwEL33mCAb0yJfFE20IZju5IRk0WBZiBM",
