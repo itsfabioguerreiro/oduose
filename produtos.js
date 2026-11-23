@@ -7,9 +7,9 @@ window.DADOS={
   "email": "compras@oduose.pt",
   "tel": "(+351) 932 098 828",
   "horario": "Dias úteis, das 9.30 às 18.00h",
-  "emp": "[Odu Osé - Artigos Religiosos]",
-  "nif": "[518 435 210]",
-  "morada": "[Morada da sede]",
+  "emp": "Odu Osé - Artigos Religiosos",
+  "nif": "518 435 210",
+  "morada": "Largo do Cabeceiro Nº3, São Mamede",
   "firebase": {
     "apiKey": "AIzaSyBwEL33mCAb0yJfFE20IZju5IRk0WBZiBM",
     "authDomain": "oduose-b0133.firebaseapp.com",
