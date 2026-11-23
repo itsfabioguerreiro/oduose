@@ -17,7 +17,7 @@ window.DADOS={
     "storageBucket": "oduose-b0133.firebasestorage.app",
     "messagingSenderId": "861099749019",
     "appId": "1:861099749019:web:cdf5ca7aa9bfb281b3203e"
-  }": {}
+  }
  },
  "prod": [
   {
