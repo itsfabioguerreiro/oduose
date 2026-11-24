@@ -7,7 +7,7 @@
 @media(prefers-color-scheme:dark){:root{--bg:#14171c;--p:#1d2128;--t:#e8e8e8;--m:#9aa0a8;--l:#2c313a;color-scheme:dark}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:16px/1.5 system-ui,Roboto,sans-serif}
 header{background:var(--b);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:5}header b{font-size:1.2rem}
-nav{display:flex;gap:6px;margin-top:10px}nav button{flex:1;border:0;border-radius:8px;padding:10px;font:600 .95rem inherit;background:#ffffff33;color:#fff;cursor:pointer}nav button.on{background:#fff;color:var(--b)}
+nav{display:flex;gap:6px;margin-top:10px;overflow-x:auto}nav button{flex:1 0 auto;white-space:nowrap;border:0;border-radius:8px;padding:10px 14px;font:600 .95rem inherit;background:#ffffff33;color:#fff;cursor:pointer}nav button.on{background:#fff;color:var(--b)}
 main{max-width:860px;margin:0 auto;padding:16px}
 .card{background:var(--p);border:1px solid var(--l);border-radius:12px;padding:14px;margin-bottom:12px}
 input,select,textarea{width:100%;padding:11px;border:1px solid var(--l);border-radius:8px;background:var(--bg);color:var(--t);font:inherit;margin:4px 0 10px}
@@ -20,16 +20,18 @@ label{font-size:.85rem;color:var(--m);font-weight:600}label.ck{display:flex;gap:
 #md .card{max-width:560px;margin:0 auto}
 .bn{background:#fff3cd;color:#664d03;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:.9rem}
 pre{white-space:pre-wrap;background:var(--bg);padding:10px;border-radius:8px;font-size:.85rem;max-height:200px;overflow:auto}
+.bth{width:100%;height:130px;border-radius:8px;background:#ccc center/cover no-repeat;margin-bottom:8px}.sm{padding:8px 12px}.bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
 .hint{color:var(--m);font-size:.85rem;margin:0 0 10px}
 </style></head><body>
-<header><b>OduOse · Painel</b><nav><button data-v="pr" class="on">Produtos</button><button data-v="df">Definições</button><button data-v="pb">Publicar</button><button data-v="od">Pedidos</button></nav></header>
+<header><b>OduOse · Painel</b><nav><button data-v="pr" class="on">Produtos</button><button data-v="df">Definições</button><button data-v="pb">Publicar</button><button data-v="bn">Banners</button><button data-v="tx">Textos</button><button data-v="od">Pedidos</button></nav></header>
 <main>
 <div id="dft" class="bn" hidden>Tem alterações ainda não publicadas (guardadas neste dispositivo). <button class="btn g" id="dsc">Descartar</button></div>
 <section id="pr"><div class="row" style="margin-bottom:12px"><input id="q" placeholder="Pesquisar produto" style="margin:0"><button class="btn" id="nw" style="white-space:nowrap">+ Novo</button></div><div id="ls"></div></section>
 <section id="df" hidden><div class="card"><label>WhatsApp (com indicativo, sem +)</label><input id="c_wa" inputmode="numeric"><label>Utilizador PayPal.me</label><input id="c_paypal"><label>Número MB WAY</label><input id="c_mbway"><label>IBAN</label><input id="c_iban"><label>E-mail</label><input id="c_email" type="email"><label>Telefone (rodapé)</label><input id="c_tel"><label>Horário de atendimento</label><input id="c_horario"><label>Nome legal da empresa</label><input id="c_emp"><label>NIF</label><input id="c_nif"><label>Morada da sede</label><input id="c_morada"><label>Ligação Firebase (contas de cliente e pedidos): cole aqui a configuração do Firebase</label><textarea id="c_fb" rows="5" placeholder="const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"></textarea><p class="hint" id="fbs"></p><button class="btn" id="sc">Guardar definições</button></div></section>
+<section id="bn" hidden></section><section id="tx" hidden></section>
 <section id="od" hidden><div id="odb"></div></section>
 <section id="pb" hidden>
-<div class="card"><h3 style="margin-top:0">Publicar direto (recomendado)</h3><p class="hint">Envia as alterações e as fotos para o GitHub, e o site atualiza sozinho em cerca de 1 minuto. Configuração única, veja o LEIA-ME.</p><label>Repositório (utilizador/nome)</label><input id="gr" placeholder="joao/oduose-site"><label>Token do GitHub</label><input id="gt" type="password" autocomplete="off"><label>Ramo</label><input id="gb" value="main"><label class="ck"><input type="checkbox" id="gk" checked> Lembrar neste dispositivo</label><button class="btn" id="go">Publicar agora</button><pre id="lg" hidden></pre></div>
+<div class="card"><h3 style="margin-top:0">Publicar direto (recomendado)</h3><p class="hint">Envia as alterações e as fotos para o GitHub, e o site atualiza sozinho em cerca de 1 minuto. Configuração única, veja o LEIA-ME.</p><label>Repositório (utilizador/nome)</label><input id="gr" placeholder="itsfabioguerreiro/oduose"><label>Token do GitHub</label><input id="gt" type="password" autocomplete="off"><label>Ramo</label><input id="gb" value="main"><label class="ck"><input type="checkbox" id="gk" checked> Lembrar neste dispositivo</label><button class="btn" id="go">Publicar agora</button><pre id="lg" hidden></pre></div>
 <div class="card"><h3 style="margin-top:0">Ou descarregar o ficheiro</h3><p class="hint">Descarrega o produtos.js (com as fotos incluídas), substitui o ficheiro na pasta do site e volta a enviar a pasta para o alojamento.</p><button class="btn g" id="dl">Descarregar produtos.js</button></div></section>
 </main>
 <div id="md"><div class="card" id="fm"></div></div>
@@ -400,10 +402,13 @@ pre{white-space:pre-wrap;background:var(--bg);padding:10px;border-radius:8px;fon
 var $=function(i){return document.getElementById(i)},D,ED=null;
 try{var s=localStorage.getItem("oduose_draft");D=s?JSON.parse(s):null}catch(e){D=null}
 if(D)$("dft").hidden=false;else D=JSON.parse(JSON.stringify(window.DADOS));
+var DEFS={"info": {"t": "Encomendas por WhatsApp...", "x": "Escolha os artigos, envie o pedido e confirmamos portes e pagamento consigo."}, "rev": {"t": "Revenda e preços especiais", "x": "Para encomendas a partir de 150 €. Importamos e exportamos artigos diretamente do Brasil e da Nigéria.", "b": "Condições de revenda"}, "slides": [{"t": "Velas de 7 Dias", "k": "candle", "c": ["#c0392b", "#f4f4f4", "#222"], "bg": "#5a4632,#2b3a2b", "f": "Velas e ervas", "img": ""}, {"t": "Guias de Orixá", "k": "beads", "c": ["#f6f6f6", "#6fb3e0", "#1d3f8f"], "bg": "#2c3e66,#1a2440", "f": "Guias e pulseiras", "img": ""}, {"t": "Jogos de adivinhação", "k": "shells", "c": ["#fbf7ee", "#2E7D5B", "#8a5a2f"], "bg": "#4a3a2a,#2a2a1f", "f": "Adivinhação", "img": ""}], "b1": {"t": "VELAS DE 7 DIAS", "s": "Genuínas...", "x": "Fundamento e tradição para o seu altar", "f": "Velas e ervas", "img": ""}, "b2": {"t": "GUIAS DE ORIXÁ", "x": "Contas selecionadas, nas cores de cada Orixá", "f": "Guias e pulseiras", "img": ""}, "b3": {"t": "AS FAMOSAS FERRAMENTAS DE ORIXÁ", "f": "Ferramentas", "img": ""}, "quem": "O nome junta Odù, os caminhos do destino em Ifá, e Òṣe, o machado de Xangô. Nasceu para que praticantes encontrem artigos de qualidade, de fornecedores que respeitam o culto.\n\nSomos importadores e exportadores: trazemos os artigos diretamente do Brasil e da Nigéria, e fazemos revenda com preços especiais para encomendas a partir de 150 €.\n\nAlguns itens de fundamento só devem ser adquiridos com orientação do seu Babalorixá, Ialorixá, Babalawo ou dirigente. Os artigos são vendidos sem consagração.", "envio": "Enviamos para todo o país. As encomendas são preparadas em 1 a 3 dias úteis após a confirmação do pagamento e enviadas por transportadora com número de seguimento.\n\nOs prazos de entrega são indicativos e comunicados na confirmação do pedido. Em Portugal continental costumam ser de 2 a 5 dias úteis. Ilhas e estrangeiro têm prazos e portes próprios.\n\nOs portes são sempre indicados antes do pagamento, nunca depois."};
+function mkSite(d){d=d||{};var o={};for(var k in DEFS){var v=DEFS[k];if(typeof v==='string'||Array.isArray(v))o[k]=d[k]!=null?d[k]:JSON.parse(JSON.stringify(v));else o[k]=Object.assign({},v,d[k]||{})}return o}
+D.site=mkSite(D.site);
 function sv(){try{localStorage.setItem("oduose_draft",JSON.stringify(D));$("dft").hidden=false}catch(e){alert("Sem espaço para guardar o rascunho neste dispositivo. Publique agora ou use fotos mais pequenas.")}}
 function eur(v){return Number(v).toFixed(2).replace(".",",")+" €"}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-document.querySelector("nav").onclick=function(e){var v=e.target.dataset.v;if(!v)return;["pr","df","pb","od"].forEach(function(k){$(k).hidden=k!==v});Array.prototype.forEach.call(this.children,function(b){b.classList.toggle("on",b.dataset.v===v)});if(v=="od")od()};
+document.querySelector("nav").onclick=function(e){var v=e.target.dataset.v;if(!v)return;["pr","bn","tx","df","pb","od"].forEach(function(k){$(k).hidden=k!==v});Array.prototype.forEach.call(this.children,function(b){b.classList.toggle("on",b.dataset.v===v)});if(v=="od")od();if(v=="bn")bnr();if(v=="tx")txr()};
 function ls(){var q=$("q").value.toLowerCase(),h="";D.prod.filter(function(p){return!q||(p.n+p.t+p.ty).toLowerCase().indexOf(q)>-1}).forEach(function(p){
 h+='<div class="card row"><div class="th" style="background-color:'+esc(p.c||"#ddd")+(p.img?';background-image:url('+esc(p.img)+')':'')+'"></div><div><b>'+esc(p.n)+'</b><br><span style="color:var(--m)">'+esc(p.t)+' · '+esc(p.ty)+'</span><br>'+eur(p.p)+(p.pc?' <span class="tg">-'+p.pc+'%</span>':'')+(p.nv?'<span class="tg">Novo</span>':'')+(p.esg?'<span class="tg">Esgotado</span>':'')+(p.img?'':'<span class="tg">Sem foto</span>')+'</div><button class="btn g" data-e="'+p.id+'">Editar</button></div>'});
 $("ls").innerHTML=h||'<p class="hint">Nenhum produto.</p>'}
@@ -432,12 +437,39 @@ async function put(repo,tok,br,path,c64,msg){var u="https://api.github.com/repos
 var r=await fetch(u+"?ref="+encodeURIComponent(br),{headers:h});if(r.ok){var j=await r.json();sha=j.sha}else if(r.status===401||r.status===403)throw new Error("Token inválido ou sem permissão (Contents: Read and write).");else if(r.status===404&&path==="produtos.js"){var rr=await fetch("https://api.github.com/repos/"+repo,{headers:h});if(!rr.ok)throw new Error("Repositório não encontrado. Confirme o nome e o token.")}
 var b={message:msg,content:c64,branch:br};if(sha)b.sha=sha;var w=await fetch(u,{method:"PUT",headers:h,body:JSON.stringify(b)});if(!w.ok)throw new Error(path+": erro "+w.status)}
 $("go").onclick=async function(){var repo=$("gr").value.trim(),tok=$("gt").value.trim(),br=$("gb").value.trim()||"main";if(!repo||!tok){alert("Preencha o repositório e o token.");return}
+if(repo.indexOf("/")<1){alert("Escreva o repositório como utilizador/nome, por exemplo itsfabioguerreiro/oduose.");return}
 if($("gk").checked)try{localStorage.setItem("oduose_gh",JSON.stringify({r:repo,t:tok,b:br}))}catch(e){}else try{localStorage.removeItem("oduose_gh")}catch(e){}
 this.disabled=true;$("lg").textContent="";try{var C=JSON.parse(JSON.stringify(D));
 for(var i=0;i<C.prod.length;i++){var p=C.prod[i];if(p.img&&p.img.indexOf("data:")===0){var nm="fotos/p"+p.id+"-"+Date.now()+".jpg";lg("A enviar foto: "+p.n);await put(repo,tok,br,nm,p.img.split(",")[1],"Foto "+p.n);p.img=nm}}
-lg("A publicar produtos e definições...");await put(repo,tok,br,"produtos.js",b64(ex(C)),"Atualizar produtos");D=C;sv();ls();lg("Feito. O site atualiza em cerca de 1 minuto.")}catch(e){lg("Erro: "+e.message)}this.disabled=false};
+var bl=[["b1",C.site.b1],["b2",C.site.b2],["b3",C.site.b3]].concat(C.site.slides.map(function(s,j){return["s"+j,s]}));
+for(var j=0;j<bl.length;j++){var o=bl[j][1];if(o.img&&o.img.indexOf("data:")===0){var nb="fotos/b-"+bl[j][0]+"-"+Date.now()+".jpg";lg("A enviar imagem do banner: "+(o.t||bl[j][0]));await put(repo,tok,br,nb,o.img.split(",")[1],"Banner "+bl[j][0]);o.img=nb}}
+lg("A publicar produtos, banners e definições...");await put(repo,tok,br,"produtos.js",b64(ex(C)),"Atualizar produtos");D=C;sv();ls();lg("Feito. O site atualiza em cerca de 1 minuto.")}catch(e){lg("Erro: "+e.message)}this.disabled=false};
 try{var g=JSON.parse(localStorage.getItem("oduose_gh")||"null");if(g){$("gr").value=g.r;$("gt").value=g.t;$("gb").value=g.b}}catch(e){}
 
+
+var tmr;function sv2(){clearTimeout(tmr);tmr=setTimeout(sv,400)}
+function gp(p){var a=p.split("."),o=D.site;for(var i=0;i<a.length;i++)o=o[a[i]];return o}
+function sp(p,v){var a=p.split("."),o=D.site;for(var i=0;i<a.length-1;i++)o=o[a[i]];o[a[a.length-1]]=v}
+function rz(f,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var w=Math.min(1400,im.width),h=Math.round(im.height*w/im.width),c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(im,0,0,w,h);cb(c.toDataURL("image/jpeg",.78))};im.onerror=function(){alert("Não foi possível ler esta imagem.")};im.src=r.result};r.readAsDataURL(f)}
+function dest(cur){var b=["Todos","NOVIDADES","PROMOÇÕES","Umbanda","Candomblé","Ifá"];types().forEach(function(t){if(b.indexOf(t)<0)b.push(t)});if(cur&&b.indexOf(cur)<0)b.push(cur);return b}
+function fld(l,p,ta){var v=gp(p);return '<label>'+l+'</label>'+(ta?'<textarea rows="'+ta+'" data-p="'+p+'">'+esc(v)+'</textarea>':'<input data-p="'+p+'" value="'+esc(v)+'">')}
+function sel(p){var v=gp(p);return '<label>Ao tocar, abre a categoria</label><select data-p="'+p+'">'+dest(v).map(function(t){return '<option'+(t===v?' selected':'')+'>'+esc(t)+'</option>'}).join("")+'</select>'}
+function imgf(p){var o=gp(p),g=(o.bg||"#2c3e66,#1a2440").split(","),bg=o.img?'background-image:url('+esc(o.img)+')':'background:linear-gradient(135deg,'+esc(g[0])+','+esc(g[1]||g[0])+')';
+return '<div class="bth" style="'+bg+'"></div><label>Imagem (sem imagem, o site mostra a ilustração)</label><input type="file" accept="image/*" data-img="'+p+'">'+(o.img?'<button class="btn g sm" data-act="rm" data-p="'+p+'">Remover imagem</button>':'')}
+function bnr(){var S=D.site,h='<p class="hint">Mude as imagens e os textos dos banners da página inicial. Depois toque em Publicar.</p><h3>Carrossel do topo</h3>';
+S.slides.forEach(function(s,i){var p="slides."+i;h+='<div class="card">'+imgf(p)+fld("Legenda",p+".t")+sel(p+".f")+'<div class="bar"><button class="btn g sm" data-act="up" data-i="'+i+'">↑ Subir</button><button class="btn g sm" data-act="dn" data-i="'+i+'">↓ Descer</button><button class="btn d sm" data-act="del" data-i="'+i+'">Apagar</button></div></div>'});
+h+='<button class="btn" data-act="add" style="margin-bottom:18px">+ Novo slide</button><h3>Banner das velas</h3><div class="card">'+imgf("b1")+fld("Título","b1.t")+fld("Frase em destaque","b1.s")+fld("Texto","b1.x")+sel("b1.f")+'</div><h3>Banner das guias</h3><div class="card">'+imgf("b2")+fld("Título","b2.t")+fld("Texto","b2.x")+sel("b2.f")+'</div><h3>Banner das ferramentas</h3><div class="card">'+imgf("b3")+fld("Título","b3.t")+sel("b3.f")+'</div>';
+$("bn").innerHTML=h}
+function txr(){$("tx").innerHTML='<p class="hint">Textos da página inicial. Deixe uma linha em branco entre parágrafos. O horário e os contactos mudam-se em Definições.</p><div class="card"><h3 style="margin-top:0">Faixa azul</h3>'+fld("Título","info.t")+fld("Texto","info.x",2)+'</div><div class="card"><h3 style="margin-top:0">Faixa da revenda</h3>'+fld("Título","rev.t")+fld("Texto","rev.x",3)+fld("Texto do botão","rev.b")+'</div><div class="card"><h3 style="margin-top:0">Quem somos</h3>'+fld("Texto","quem",10)+'</div><div class="card"><h3 style="margin-top:0">Condições de envio</h3>'+fld("Texto","envio",8)+'</div>'}
+function bh(e){var t=e.target;if(t.dataset.p&&t.type!=="file"){sp(t.dataset.p,t.value);sv2()}}
+$("bn").oninput=$("tx").oninput=bh;$("bn").onchange=$("tx").onchange=function(e){var t=e.target;if(t.dataset.img&&t.files&&t.files[0]){var p=t.dataset.img;rz(t.files[0],function(u){gp(p).img=u;sv();bnr()});return}bh(e)};
+$("bn").onclick=function(e){var t=e.target,a=t.dataset.act;if(!a)return;var S=D.site,i=+t.dataset.i;
+if(a=="rm"){gp(t.dataset.p).img="";sv()}
+if(a=="add")S.slides.push({t:"Novo slide",k:"box",c:["#8c7bf0"],bg:"#2c3e66,#1a2440",f:"Todos",img:""});
+if(a=="del"&&confirm("Apagar este slide?"))S.slides.splice(i,1);
+if(a=="up"&&i>0)S.slides.splice(i-1,0,S.slides.splice(i,1)[0]);
+if(a=="dn"&&i<S.slides.length-1)S.slides.splice(i+1,0,S.slides.splice(i,1)[0]);
+sv();bnr()};
 var EST=["Novo","Pago","Enviado","Concluído","Cancelado"];
 async function od(){var b=$("odb"),C=D.cfg.firebase;if(!C||!C.apiKey){b.innerHTML='<div class="card">Ligue primeiro o Firebase em Definições e publique. Veja o LEIA-ME.</div>';return}
 if(!window.FBA){b.innerHTML='<div class="card">A ligar ao Firebase… (guarde a configuração em Definições e recarregue esta página)</div>';return}
