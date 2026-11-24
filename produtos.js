@@ -402,7 +402,7 @@ window.DADOS={
     ],
     "bg": "#5a4632,#2b3a2b",
     "f": "Velas e ervas",
-    "img": "fotos/b-s0-1795549555650.jpg"
+    "img": "fotos/b-s0-1795549819434.jpg"
    },
    {
     "t": "Guias de Orixá",
@@ -414,7 +414,7 @@ window.DADOS={
     ],
     "bg": "#2c3e66,#1a2440",
     "f": "Guias e pulseiras",
-    "img": "fotos/b-s1-1795549558374.jpg"
+    "img": "fotos/b-s1-1795549823541.jpg"
    },
    {
     "t": "Jogos de adivinhação",
@@ -434,13 +434,13 @@ window.DADOS={
    "s": "Genuínas...",
    "x": "Fundamento e tradição para o seu altar",
    "f": "Velas e ervas",
-   "img": "fotos/b-b1-1795549549841.jpg"
+   "img": "fotos/b-b1-1795549810501.jpg"
   },
   "b2": {
    "t": "GUIAS DE ORIXÁ",
    "x": "Contas selecionadas, nas cores de cada Orixá",
    "f": "Guias e pulseiras",
-   "img": "fotos/b-b2-1795549553186.jpg"
+   "img": "fotos/b-b2-1795549816360.jpg"
   },
   "b3": {
    "t": "AS FAMOSAS FERRAMENTAS DE ORIXÁ",
