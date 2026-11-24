@@ -430,11 +430,11 @@ window.DADOS={
    }
   ],
   "b1": {
-   "t": "VELAS DE 7 DIAS",
+   "t": "VELAS PALITO PACK 10",
    "s": "Genuínas...",
    "x": "Fundamento e tradição para o seu altar",
    "f": "Velas e ervas",
-   "img": "fotos/b-b1-1795549810501.jpg"
+   "img": "fotos/b-b1-1795550460574.jpg"
   },
   "b2": {
    "t": "GUIAS DE ORIXÁ",
