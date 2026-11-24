@@ -30,7 +30,7 @@ window.DADOS={
    "pc": 0,
    "nv": true,
    "esg": false,
-   "img": "",
+   "img": "fotos/p1-1795522974999.jpg",
    "k": "beads",
    "a": "#f6f6f6",
    "c": "#8fa6cf"
