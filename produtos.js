@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 24,
+   "n": "Pack 10 Velas Brancas 15cm",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Velas Brancas de ritual, 15cm em pack de 10",
+   "p": 4.55,
+   "pc": 30,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p24-1795532207483.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 1,
    "n": "Guia de Oxalá",
    "t": "Umbanda",
