@@ -380,5 +380,74 @@ window.DADOS={
    "a": "#8a5a2f",
    "c": "#ecdfc8"
   }
- ]
+ ],
+ "site": {
+  "info": {
+   "t": "Encomendas por WhatsApp...",
+   "x": "Escolha os artigos, envie o pedido e confirmamos portes e pagamento consigo."
+  },
+  "rev": {
+   "t": "Revenda e preços especiais",
+   "x": "Para encomendas a partir de 150 €. Importamos e exportamos artigos diretamente do Brasil e da Nigéria.",
+   "b": "Condições de revenda"
+  },
+  "slides": [
+   {
+    "t": "Velas de 7 Dias",
+    "k": "candle",
+    "c": [
+     "#c0392b",
+     "#f4f4f4",
+     "#222"
+    ],
+    "bg": "#5a4632,#2b3a2b",
+    "f": "Velas e ervas",
+    "img": "fotos/b-s0-1795549555650.jpg"
+   },
+   {
+    "t": "Guias de Orixá",
+    "k": "beads",
+    "c": [
+     "#f6f6f6",
+     "#6fb3e0",
+     "#1d3f8f"
+    ],
+    "bg": "#2c3e66,#1a2440",
+    "f": "Guias e pulseiras",
+    "img": "fotos/b-s1-1795549558374.jpg"
+   },
+   {
+    "t": "Jogos de adivinhação",
+    "k": "shells",
+    "c": [
+     "#fbf7ee",
+     "#2E7D5B",
+     "#8a5a2f"
+    ],
+    "bg": "#4a3a2a,#2a2a1f",
+    "f": "Adivinhação",
+    "img": ""
+   }
+  ],
+  "b1": {
+   "t": "VELAS DE 7 DIAS",
+   "s": "Genuínas...",
+   "x": "Fundamento e tradição para o seu altar",
+   "f": "Velas e ervas",
+   "img": "fotos/b-b1-1795549549841.jpg"
+  },
+  "b2": {
+   "t": "GUIAS DE ORIXÁ",
+   "x": "Contas selecionadas, nas cores de cada Orixá",
+   "f": "Guias e pulseiras",
+   "img": "fotos/b-b2-1795549553186.jpg"
+  },
+  "b3": {
+   "t": "AS FAMOSAS FERRAMENTAS DE ORIXÁ",
+   "f": "Ferramentas",
+   "img": ""
+  },
+  "quem": "O nome junta Odù, os caminhos do destino em Ifá, e Òṣe, o machado de Xangô. Nasceu para que praticantes encontrem artigos de qualidade, de fornecedores que respeitam o culto.\n\nSomos importadores e exportadores: trazemos os artigos diretamente do Brasil e da Nigéria, e fazemos revenda com preços especiais para encomendas a partir de 150 €.\n\nAlguns itens de fundamento só devem ser adquiridos com orientação do seu Babalorixá, Ialorixá, Babalawo ou dirigente. Os artigos são vendidos sem consagração.",
+  "envio": "Enviamos para todo o país. As encomendas são preparadas em 1 a 3 dias úteis após a confirmação do pagamento e enviadas por transportadora com número de seguimento.\n\nOs prazos de entrega são indicativos e comunicados na confirmação do pedido. Em Portugal continental costumam ser de 2 a 5 dias úteis. Ilhas e estrangeiro têm prazos e portes próprios.\n\nOs portes são sempre indicados antes do pagamento, nunca depois."
+ }
 };
