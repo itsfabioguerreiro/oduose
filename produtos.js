@@ -88,9 +88,9 @@ window.DADOS={
    "d": "Resina pintada à mão, 20 cm.",
    "p": 34,
    "pc": 0,
-   "nv": false,
-   "esg": false,
-   "img": "",
+   "nv": true,
+   "esg": true,
+   "img": "fotos/p5-1795528139206.jpg",
    "k": "statue",
    "a": "#8a8f9c",
    "c": "#e2ddd4"
