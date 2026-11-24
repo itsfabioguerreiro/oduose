@@ -53,8 +53,8 @@ h2.st{font:300 2.1rem Roboto;color:var(--mut);margin:34px 0 18px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 14px}
 @media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
 .pc{text-align:center;display:flex;flex-direction:column}
-.th{position:relative;aspect-ratio:1/1;overflow:hidden}.th svg{display:block;width:100%;height:100%;filter:drop-shadow(0 6px 8px #0003)}.th::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,#fff8,transparent 65%),linear-gradient(transparent 70%,#0002);pointer-events:none}
-.bd{position:absolute;top:8px;left:8px;background:#e8727a;color:#fff;font:500 .85rem Roboto;padding:5px 10px;border-radius:4px;z-index:2}
+.th{position:relative;aspect-ratio:1/1;overflow:hidden}.th svg{display:block;width:100%;height:100%;filter:drop-shadow(0 6px 8px #0003)}.th::after{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 50% 35%,#fff8,transparent 65%),linear-gradient(transparent 70%,#0002);pointer-events:none}
+.bd{position:absolute;top:8px;left:8px;background:#e8727a;color:#fff;font:500 .85rem Roboto;padding:5px 10px;border-radius:4px;z-index:3}
 .cl{font-size:.8rem;color:var(--mut);margin-top:12px;text-transform:uppercase;line-height:1.3}
 .pc h3{font:400 1.2rem/1.3 Roboto;color:var(--lk);margin:8px 6px 6px;flex:1}
 .pr{font:400 1.45rem Roboto}.pr s{font-size:1.1rem;color:var(--mut);margin-right:6px}
@@ -67,12 +67,14 @@ form.ct{display:grid;gap:10px;max-width:480px;margin-top:10px}
 .ct input,.ct textarea{padding:13px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}
 .btn{background:var(--sb);color:#fff;border:0;border-radius:999px;padding:13px;font:500 1rem Roboto;cursor:pointer}
 .em{color:var(--mut);text-align:center;padding:30px;grid-column:1/-1}
-footer{background:var(--bl);color:#fff;margin-top:50px}
-footer .w{padding-top:36px;padding-bottom:30px}
-footer p{margin:0 0 22px;font-size:1.1rem;line-height:1.5}footer h4{font:300 1.9rem Roboto;margin:34px 0 14px}
-footer a{color:#fff;display:block;margin-bottom:6px;font-size:1.1rem;text-underline-offset:3px}
-.pay{display:flex;gap:8px;flex-wrap:wrap}.pay span{background:#fff;color:#16294d;border-radius:6px;padding:8px 12px;font:700 .85rem Roboto}
-.cp{background:#222;color:#ddd;padding:20px 0;font-size:1rem}
+footer{background:var(--bl);color:#fff;margin-top:36px;font-size:.88rem}
+.fg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 20px;padding-top:22px;padding-bottom:18px}
+@media(min-width:800px){.fg{grid-template-columns:1.3fr 1.2fr 1fr .8fr 1fr}}
+footer h4{font:500 .95rem Roboto;margin:0 0 6px}
+footer p{margin:0 0 6px;font-size:.88rem;line-height:1.4}
+footer a{color:#fff;display:block;margin-bottom:3px;font-size:.88rem;text-underline-offset:3px}
+.pay{display:flex;gap:5px;flex-wrap:wrap}.pay span{background:#fff;color:#16294d;border-radius:5px;padding:4px 8px;font:700 .72rem Roboto}
+.cp{background:#222;color:#ddd;padding:10px 0;font-size:.8rem}
 #mn{position:fixed;inset:0;z-index:50;display:none}#mn.open{display:flex}
 #mn .pn{width:78%;max-width:340px;background:var(--bg);overflow:auto;padding-top:env(safe-area-inset-top,0px)}
 #mn .ov{flex:1;background:#00000066;position:relative}#mn .x{position:absolute;top:22px;right:22px;background:none;border:0;color:#fff;font-size:2.2rem;cursor:pointer}
@@ -108,13 +110,15 @@ footer a{color:#fff;display:block;margin-bottom:6px;font-size:1.1rem;text-underl
 <div id="b3"></div>
 <h2 class="st" id="todos">Todos os artigos</h2><div class="grid" id="grid"></div>
 <div class="txt" id="quem"><h2 class="st">Quem somos</h2><p>O nome junta Odù, os caminhos do destino em Ifá, e Òṣe, o machado de Xangô. Nasceu para que praticantes encontrem artigos de qualidade, de fornecedores que respeitam o culto.</p><p>Somos importadores e exportadores: trazemos os artigos diretamente do Brasil e da Nigéria, e fazemos revenda com preços especiais para encomendas a partir de 150 €.</p><p>Alguns itens de fundamento só devem ser adquiridos com orientação do seu Babalorixá, Ialorixá, Babalawo ou dirigente. Os artigos são vendidos sem consagração.</p>
-<h3 id="envio">Condições de envio</h3><p>Enviamos para todo o país. As encomendas são preparadas em 1 a 3 dias úteis após a confirmação do pagamento e enviadas por transportadora ou ctt com número de seguimento.</p><p>Os prazos de entrega são indicativos e comunicados na confirmação do pedido. Em Portugal continental costumam ser de 2 a 5 dias úteis. Ilhas e estrangeiro têm prazos e portes próprios.</p><p>Os portes são sempre indicados antes do pagamento, nunca depois.</p>
+<h3 id="envio">Condições de envio</h3><p>Enviamos para todo o país. As encomendas são preparadas em 1 a 3 dias úteis após a confirmação do pagamento e enviadas por transportadora com número de seguimento.</p><p>Os prazos de entrega são indicativos e comunicados na confirmação do pedido. Em Portugal continental costumam ser de 2 a 5 dias úteis. Ilhas e estrangeiro têm prazos e portes próprios.</p><p>Os portes são sempre indicados antes do pagamento, nunca depois.</p>
 <h3 id="contactos">Contactos</h3><p>E-mail: <span class="cfg-e">geral@oduose.pt</span><br>WhatsApp: <span class="cfg-h">dias úteis, das 9.30 às 16.00h</span></p><form class="ct" id="cf"><input id="cn" placeholder="O seu nome" required aria-label="Nome"><textarea id="cm" rows="3" placeholder="A sua mensagem" required aria-label="Mensagem"></textarea><button class="btn" type="submit">Enviar por WhatsApp</button></form></div>
 </div></main>
-<footer><div class="w"><p>WhatsApp: <span class="cfg-t">(+351) 932 098 828</span><br><span class="cfg-h">Dias úteis, das 9.30 às 16.00h</span></p><p>E-mail: <span class="cfg-e">geral@oduose.pt</span></p>
-<h4>Menções Legais</h4><a href="#" data-l="termos">Termos e condições</a><a href="#" data-l="devol">Política de devoluções</a><a href="#" data-l="priv">Política de privacidade</a><a href="#" data-l="lit">Resolução de litígios</a><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener">Livro de reclamações</a>
-<h4>Ajuda</h4><a href="#" data-l="faq">Perguntas frequentes</a><a href="#" data-l="rev">Condições de revenda</a><a href="#quem">Quem somos</a><h4>Tradições</h4><a href="#todos" data-f="Umbanda">Umbanda</a><a href="#todos" data-f="Candomblé">Candomblé</a><a href="#todos" data-f="Ifá">Ifá</a>
-<h4>Métodos de pagamento</h4><div class="pay"><span>Visa</span><span>Mastercard</span><span>PayPal</span><span>Multibanco</span><span>MB WAY</span></div></div>
+<footer><div class="w fg">
+<div><h4>Contactos</h4><p>WhatsApp: <span class="cfg-t">(+351) 90 000 00 00</span><br><span class="cfg-h">Dias úteis, das 9.30 às 16.00h</span></p><p>E-mail: <span class="cfg-e">geral@oduose.pt</span></p></div>
+<div><h4>Menções legais</h4><a href="#" data-l="termos">Termos e condições</a><a href="#" data-l="devol">Política de devoluções</a><a href="#" data-l="priv">Política de privacidade</a><a href="#" data-l="lit">Resolução de litígios</a><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener">Livro de reclamações</a></div>
+<div><h4>Ajuda</h4><a href="#" data-l="faq">Perguntas frequentes</a><a href="#" data-l="rev">Condições de revenda</a><a href="#quem">Quem somos</a></div>
+<div><h4>Tradições</h4><a href="#todos" data-f="Umbanda">Umbanda</a><a href="#todos" data-f="Candomblé">Candomblé</a><a href="#todos" data-f="Ifá">Ifá</a></div>
+<div><h4>Pagamento</h4><div class="pay"><span>Visa</span><span>Mastercard</span><span>PayPal</span><span>Multibanco</span><span>MB WAY</span></div></div></div>
 <div class="cp"><div class="w">© 2026 OduOse. Todos os direitos reservados.</div></div></footer>
 <a class="wa" id="wa" href="#" target="_blank" rel="noopener" aria-label="Falar por WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></a>
 <div id="mn"><div class="pn"><form id="mf"><input id="mq" type="search" placeholder="Procurar…" aria-label="Procurar"></form><div id="ml"></div></div><div class="ov" id="mov"><button class="x" id="mx" aria-label="Fechar menu">×</button></div></div>
@@ -128,15 +132,15 @@ footer a{color:#fff;display:block;margin-bottom:6px;font-size:1.1rem;text-underl
 <script>window.DADOS=window.DADOS||{
  "cfg": {
   "wa": "351900000000",
-  "paypal": "oduose",
-  "mbway": "932 098 828",
+  "paypal": "O_SEU_UTILIZADOR",
+  "mbway": "910 000 000",
   "iban": "PT50 0000 0000 0000 0000 0000 0",
-  "email": "compras@oduose.pt",
-  "tel": "(+351) 932 098 828",
-  "horario": "Dias úteis, das 9.30 às 18.00h",
-  "emp": "Odu Ose - Artigos Religiosos",
-  "nif": "518 425 210",
-  "morada": "São Mamede",
+  "email": "geral@oduose.pt",
+  "tel": "(+351) 90 000 00 00",
+  "horario": "Dias úteis, das 9.30 às 16.00h",
+  "emp": "[Nome legal da empresa]",
+  "nif": "[NIF]",
+  "morada": "[Morada da sede]",
   "firebase": {}
  },
  "prod": [
@@ -513,7 +517,8 @@ P.forEach(function(x){x.ty=x.ty||TY[x.k]||"Outros";x.pc=+x.pc||0;x.nv=!!x.nv;x.o
 var CATS=["NOVIDADES","PROMOÇÕES","Umbanda","Candomblé","Ifá"];P.forEach(function(x){if(CATS.indexOf(x.ty)<0)CATS.push(x.ty)});
 function eur(v){return v.toFixed(2).replace(".",",")+"€"}
 function ok(x,f){return f==="Todos"||(f==="NOVIDADES"&&x.nv)||(f==="PROMOÇÕES"&&x.pc)||x.t===f||x.ty===f}
-function card(x,nv){return '<article class="pc"><div class="th" data-p="'+x.id+'" style="cursor:pointer;background:'+x.c+'">'+(x.pc?'<span class="bd">-'+x.pc+'%</span>':'')+(x.img?'<img src="'+x.img+'" alt="'+x.n+'" style="width:100%;height:100%;object-fit:cover">':art(x.k,x.a))+'</div>'+(nv?'<div class="cl">'+x.t+', '+x.ty+'</div>':'')+'<h3 data-p="'+x.id+'" style="cursor:pointer">'+x.n+'</h3><div class="pr">'+(x.old?'<s>'+eur(x.old)+'</s>':'')+eur(x.p)+'</div>'+(x.esg?'<button class="add" disabled style="opacity:.5">Esgotado</button>':'<button class="add" data-a="'+x.id+'">Adicionar</button>')+'</article>'}
+function ph(x){return art(x.k,x.a)+'<img src="'+(x.img||"fotos/"+x.id+".jpg")+'" alt="'+esc(x.n)+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1" onerror="var s=this.src;if(/\.jpg$/.test(s))this.src=s.replace(\'.jpg\',\'.png\');else if(/\.png$/.test(s))this.src=s.replace(\'.png\',\'.webp\');else this.remove()">'}
+function card(x,nv){return '<article class="pc"><div class="th" data-p="'+x.id+'" style="cursor:pointer;background:'+x.c+'">'+(x.pc?'<span class="bd">-'+x.pc+'%</span>':'')+ph(x)+'</div>'+(nv?'<div class="cl">'+x.t+', '+x.ty+'</div>':'')+'<h3 data-p="'+x.id+'" style="cursor:pointer">'+x.n+'</h3><div class="pr">'+(x.old?'<s>'+eur(x.old)+'</s>':'')+eur(x.p)+'</div>'+(x.esg?'<button class="add" disabled style="opacity:.5">Esgotado</button>':'<button class="add" data-a="'+x.id+'">Adicionar</button>')+'</article>'}
 function A3(k,c){return c.map(function(z){return '<div>'+art(k,z)+'</div>'}).join("")}
 function minp(k){return Math.min.apply(null,P.filter(function(x){return x.k===k}).map(function(x){return x.p}))}
 function init(){
@@ -568,7 +573,7 @@ faq:["Perguntas Frequentes",function(){return '<h3>Como faço uma encomenda?</h3
 rev:["Condições de Revenda",function(){return '<p>Somos importadores e exportadores de artigos de Umbanda, Candomblé e Ifá. Trazemos os artigos diretamente do Brasil e da Nigéria e fazemos revenda com preços especiais para profissionais: casas de culto, terreiros, lojas e revendedores.</p><h3>Encomenda mínima</h3><p>Os preços especiais de revenda aplicam-se a encomendas a partir de 150 €.</p><h3>Como pedir preços</h3><p>Envie-nos por e-mail ('+E.e+') ou WhatsApp o nome da entidade, o NIF, a atividade e a lista de artigos com as quantidades.</p><p><a class="btn" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/'+WA+'?text='+encodeURIComponent("Olá! Gostaria de preços de revenda (encomenda a partir de 150 €). Entidade: ___ NIF: ___ Artigos e quantidades: ___")+'">Pedir preços de revenda por WhatsApp</a></p><h3>Exportação</h3><p>Também exportamos. Indique o país de destino no pedido para recebermos as condições e os portes.</p><h3>Propostas e faturação</h3><p>Respondemos em 2 dias úteis com uma proposta. Os preços, os prazos e os portes dependem dos artigos e das quantidades. Emitimos fatura com o NIF do cliente.</p><h3>Devoluções</h3><p>O direito de livre resolução de 14 dias aplica-se apenas a consumidores. As devoluções de artigos para revenda são acordadas na proposta.</p>'}],
 lit:["Resolução de Litígios",function(){return '<p class="dt">Última atualização: 21 de novembro de 2026</p><h3>Fale primeiro connosco</h3><p>Se algo correu mal, escreva para '+E.e+'. Queremos resolver o problema o mais depressa possível.</p><h3>Livro de Reclamações</h3><p>Pode apresentar uma reclamação no <a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener">Livro de Reclamações Eletrónico</a>.</p><h3>Resolução alternativa de litígios</h3><p>Em caso de litígio de consumo, o consumidor pode recorrer a uma entidade de resolução alternativa de litígios. A lista das entidades está no Portal do Consumidor, em <a href="https://www.consumidor.gov.pt" target="_blank" rel="noopener">consumidor.gov.pt</a>.</p><h3>Lei aplicável</h3><p>Aplica-se a lei portuguesa. Os tribunais portugueses são competentes, sem prejuízo dos direitos do consumidor.</p>'}]};
 function pd(id){var x=P.filter(function(z){return z.id==id})[0];if(!x)return;var rel=P.filter(function(z){return z.id!=id&&(z.t===x.t||z.ty===x.ty)}).slice(0,4);
-$("lt").textContent=x.n;$("lc").innerHTML='<div class="th" style="background:'+x.c+';max-width:380px;margin:0 auto 14px">'+(x.pc?'<span class="bd">-'+x.pc+'%</span>':'')+(x.img?'<img src="'+x.img+'" alt="'+x.n+'" style="width:100%;height:100%;object-fit:cover">':art(x.k,x.a))+'</div><p>'+x.d+'</p><p class="dt">Tradição: '+x.t+'. Tipo: '+x.ty+'. Ref. ODU-'+("00"+x.id).slice(-3)+'</p><div class="pr">'+(x.old?'<s>'+eur(x.old)+'</s>':'')+eur(x.p)+'</div>'+(x.esg?'<p><b>Esgotado</b></p>':'<button class="add" data-a="'+x.id+'" style="margin:10px 0">Adicionar ao carrinho</button>')+'<p class="dt">Artigo vendido sem consagração. Imagem ilustrativa.</p><h3>Artigos relacionados</h3><div class="grid">'+rel.map(function(z){return card(z)}).join("")+'</div>';
+$("lt").textContent=x.n;$("lc").innerHTML='<div class="th" style="background:'+x.c+';max-width:380px;margin:0 auto 14px">'+(x.pc?'<span class="bd">-'+x.pc+'%</span>':'')+ph(x)+'</div><p>'+x.d+'</p><p class="dt">Tradição: '+x.t+'. Tipo: '+x.ty+'. Ref. ODU-'+("00"+x.id).slice(-3)+'</p><div class="pr">'+(x.old?'<s>'+eur(x.old)+'</s>':'')+eur(x.p)+'</div>'+(x.esg?'<p><b>Esgotado</b></p>':'<button class="add" data-a="'+x.id+'" style="margin:10px 0">Adicionar ao carrinho</button>')+'<p class="dt">Artigo vendido sem consagração. Imagem ilustrativa.</p><h3>Artigos relacionados</h3><div class="grid">'+rel.map(function(z){return card(z)}).join("")+'</div>';
 $("lg").classList.add("open");$("lg").scrollTop=0}
 function lg(k){var o=$("lg");if(!k){o.classList.remove("open");return}var L=LEG[k];$("lt").textContent=L[0];$("lc").innerHTML=L[1]();o.classList.add("open");o.scrollTop=0}
 function pt(p){return {paypal:"Abre o PayPal com o valor do carrinho. Pode pagar com PayPal ou cartão.",mbway:"Pague por MB WAY para o "+MBWAY+".",iban:"Transfira para o IBAN "+IBAN+"."}[p]}
