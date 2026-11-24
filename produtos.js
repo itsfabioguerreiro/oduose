@@ -434,7 +434,7 @@ window.DADOS={
    "s": "Genuínas...",
    "x": "Fundamento e tradição para o seu altar",
    "f": "Velas e ervas",
-   "img": "fotos/b-b1-1795550460574.jpg"
+   "img": "fotos/b-b1-1795550586048.jpg"
   },
   "b2": {
    "t": "GUIAS DE ORIXÁ",
