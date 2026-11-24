@@ -430,11 +430,11 @@ window.DADOS={
    }
   ],
   "b1": {
-   "t": "VELAS PALITO PACK 10",
-   "s": "Genuínas...",
-   "x": "Fundamento e tradição para o seu altar",
-   "f": "Velas e ervas",
-   "img": "fotos/b-b1-1795550658598.jpg"
+   "t": "CURSOS E WORKSHOPS",
+   "s": "Conhecimento....",
+   "x": "Fundamento e tradição para si e para quem o rodeia",
+   "f": "Amuletos e cristais",
+   "img": "fotos/b-b1-1795551128648.jpg"
   },
   "b2": {
    "t": "GUIAS DE ORIXÁ",
