@@ -382,15 +382,6 @@ window.DADOS={
   }
  ],
  "site": {
-  "info": {
-   "t": "Encomendas por WhatsApp...",
-   "x": "Escolha os artigos, envie o pedido e confirmamos portes e pagamento consigo."
-  },
-  "rev": {
-   "t": "Revenda e preços especiais",
-   "x": "Para encomendas a partir de 150 €. Importamos e exportamos artigos diretamente do Brasil e da Nigéria.",
-   "b": "Condições de revenda"
-  },
   "slides": [
    {
     "t": "Velas de 7 Dias",
@@ -447,7 +438,49 @@ window.DADOS={
    "f": "Ferramentas",
    "img": ""
   },
-  "quem": "O nome junta Odù, os caminhos do destino em Ifá, e Òṣe, o machado de Xangô. Nasceu para que praticantes encontrem artigos de qualidade, de fornecedores que respeitam o culto.\n\nSomos importadores e exportadores: trazemos os artigos diretamente do Brasil e da Nigéria, e fazemos revenda com preços especiais para encomendas a partir de 150 €.\n\nAlguns itens de fundamento só devem ser adquiridos com orientação do seu Babalorixá, Ialorixá, Babalawo ou dirigente. Os artigos são vendidos sem consagração.",
-  "envio": "Enviamos para todo o país. As encomendas são preparadas em 1 a 3 dias úteis após a confirmação do pagamento e enviadas por transportadora com número de seguimento.\n\nOs prazos de entrega são indicativos e comunicados na confirmação do pedido. Em Portugal continental costumam ser de 2 a 5 dias úteis. Ilhas e estrangeiro têm prazos e portes próprios.\n\nOs portes são sempre indicados antes do pagamento, nunca depois."
+  "ui": {
+   "m_inicio": "Início",
+   "m_conta": "Registo / A Minha Conta",
+   "m_quem": "Quem Somos",
+   "m_rev": "Condições De Revenda",
+   "m_cursos": "Cursos e Formações",
+   "m_rva": "Área do Revendedor",
+   "m_envio": "Condições De Envio",
+   "m_cont": "Contactos",
+   "add": "Adicionar",
+   "add2": "Adicionar ao carrinho",
+   "esg": "Esgotado",
+   "rel": "Artigos relacionados",
+   "nota": "Artigo vendido sem consagração. Imagem ilustrativa.",
+   "vazio": "O carrinho está vazio. Escolha um artigo na loja.",
+   "nenhum": "Nenhum artigo encontrado. Limpe a pesquisa ou escolha outra categoria."
+  },
+  "leg": {
+   "termos": {
+    "t": "Termos e Condições",
+    "x": "> Última atualização: 21 de novembro de 2026\n\n## 1. Quem somos\n\nA loja OduOse é operada por {{emp}}, NIF {{nif}}, com sede em {{morada}}. Contacto: {{email}}.\n\n## 2. Objeto\n\nEstes termos regulam a venda de artigos de Umbanda, Candomblé e Ifá a consumidores. Ao fazer uma encomenda, aceita-os.\n\n## 3. Como encomendar\n\nEscolhe os artigos, adiciona-os ao carrinho e envia o pedido por WhatsApp. O contrato só fica concluído quando confirmarmos a disponibilidade, os portes e o total, e o pagamento for efetuado.\n\n## 4. Preços\n\nOs preços estão em euros e incluem IVA à taxa legal em vigor. Os portes são indicados antes do pagamento. As promoções valem enquanto houver stock.\n\n## 5. Pagamento\n\nAceitamos PayPal ou cartão, MB WAY e transferência bancária. A encomenda só é preparada depois de confirmado o pagamento. Não recolhemos nem guardamos dados de cartão.\n\n## 6. Entrega\n\nEnviamos para todo o país por transportadora. Os prazos são indicativos e comunicados na confirmação do pedido. O risco de perda ou dano passa para o cliente com a entrega.\n\n## 7. Livre resolução e garantia\n\nO cliente consumidor tem direito de livre resolução em 14 dias, nos termos da Política de devoluções, e garantia legal de 3 anos para bens novos (Decreto-Lei n.º 84/2021).\n\n## 8. Natureza dos artigos\n\nOs artigos são vendidos sem consagração, que deve ser feita pelo sacerdote ou dirigente do cliente. As imagens são ilustrativas. Artigos naturais (contas, ervas, madeira, barro, velas) podem variar em cor e forma. Os artigos têm fins religiosos, culturais e decorativos, não substituem aconselhamento médico, jurídico ou financeiro e não garantimos resultados.\n\n## Conta de cliente\n\nA conta é opcional. O cliente é responsável por manter a palavra-passe confidencial e pode pedir o apagamento da conta a qualquer momento.\n\n## 9. Propriedade intelectual\n\nOs textos, imagens e o nome OduOse pertencem à loja e não podem ser copiados sem autorização.\n\n## 10. Lei aplicável e litígios\n\nAplica-se a lei portuguesa. Veja a página Resolução de litígios.\n\n## 11. Alterações\n\nPodemos atualizar estes termos. Aplica-se a versão em vigor na data da encomenda."
+   },
+   "devol": {
+    "t": "Política de Devoluções",
+    "x": "> Última atualização: 21 de novembro de 2026\n\n## Direito de livre resolução\n\nO consumidor pode desistir da compra em 14 dias, sem indicar motivo, a contar da data em que recebe os artigos (Decreto-Lei n.º 24/2014).\n\n## Como exercer\n\nEnvie-nos uma declaração inequívoca por e-mail ({{email}}) ou WhatsApp, com o número e a data da encomenda. Depois, devolva os artigos em 14 dias.\n\n## Custos\n\nOs custos diretos da devolução são suportados pelo consumidor. Os portes de envio iniciais, na modalidade mais barata, são reembolsados.\n\n## Reembolso\n\nReembolsamos todos os pagamentos em 14 dias após a comunicação da desistência, pelo mesmo meio de pagamento. Podemos aguardar a receção dos artigos ou a prova do envio.\n\n## Estado dos artigos\n\nDevem estar sem uso, na embalagem original. O consumidor responde pela diminuição de valor resultante de manuseamento além do necessário.\n\n## Exceções\n- Artigos personalizados ou feitos por medida.\n- Artigos perecíveis, como ervas e banhos frescos.\n- Artigos selados que, por motivos de saúde ou higiene, não possam ser devolvidos depois de abertos, como defumadores e pós.\n- Artigos que o cliente tenha mandado consagrar.\n\n## Artigos com defeito\n\nSe o artigo chegar com defeito ou não conforme, contacte-nos. Tem direito à reparação ou substituição, à redução do preço ou à resolução do contrato, durante os 3 anos da garantia legal.\n\n## Modelo de desistência\n\n“Declaro que desisto da encomenda n.º ___, feita em ___ e recebida em ___. Nome: ___. Morada: ___. Data: ___.”"
+   },
+   "priv": {
+    "t": "Política de Privacidade",
+    "x": "> Última atualização: 21 de novembro de 2026\n\n## Responsável pelo tratamento\n\n{{emp}}, NIF {{nif}}, {{morada}}. Contacto: {{email}}.\n\n## Dados que tratamos\n\nNome, e-mail, telefone, morada de entrega, conteúdo dos pedidos e comunicações connosco.\n\n## Para que usamos e porquê\n- Processar encomendas, pagamentos e entregas (execução do contrato).\n- Cumprir obrigações fiscais e de faturação (obrigação legal).\n- Apoio ao cliente (interesse legítimo).\n- Comunicações promocionais, apenas se o cliente consentir.\n\n## Dados sensíveis\n\nOs artigos encomendados podem revelar convicções religiosas, uma categoria especial de dados (art. 9.º do RGPD). Usamo-los apenas para tratar a encomenda e não os utilizamos para outros fins.\n\n## Quem recebe os dados\n\nTransportadoras, prestadores de pagamento (como o PayPal e os bancos), o Google (Firebase), que aloja as contas de cliente, o WhatsApp (Meta) quando o cliente nos contacta por essa via, e o contabilista. Não vendemos dados pessoais.\n\n## Conservação\n\nGuardamos os dados de encomendas e faturas durante o prazo legal (10 anos). Os restantes dados, pelo tempo necessário à finalidade.\n\n## Os seus direitos\n\nPode pedir o acesso, a retificação, o apagamento, a limitação, a portabilidade e a oposição ao tratamento, e retirar o consentimento, escrevendo para {{email}}. Pode reclamar à CNPD em [cnpd.pt](https://www.cnpd.pt).\n\n## Conta de cliente\n\nSe criar conta, guardamos o seu e-mail, nome, telefone, morada e histórico de pedidos nos servidores do Google (Firebase), para os poder consultar em qualquer dispositivo e preencher os seus pedidos. A palavra-passe é gerida pelo Firebase Authentication e nunca a vemos. Pode pedir a correção ou o apagamento da conta em {{email}}.\n\nO carrinho fica guardado no seu dispositivo. Não usamos cookies de publicidade nem de rastreio."
+   },
+   "faq": {
+    "t": "Perguntas Frequentes",
+    "x": "## Como faço uma encomenda?\n\nAdicione os artigos ao carrinho, escolha o método de pagamento e envie o pedido por WhatsApp. Confirmamos a disponibilidade e os portes consigo.\n\n## Que métodos de pagamento aceitam?\n\nPayPal ou cartão, MB WAY e transferência bancária.\n\n## Quanto tempo demora a entrega?\n\nPreparamos a encomenda em 1 a 3 dias úteis após o pagamento. Em Portugal continental, a entrega costuma demorar 2 a 5 dias úteis.\n\n## Posso devolver um artigo?\n\nSim, tem 14 dias para desistir da compra. Veja a Política de devoluções.\n\n## Os artigos vêm consagrados?\n\nNão. A consagração deve ser feita pelo seu sacerdote ou dirigente.\n\n## Fazem encomendas personalizadas?\n\nSim, para guias, toalhas e imagens. Contacte-nos com o que pretende.\n\n## Vendem por grosso?\n\nSim. Fazemos revenda com preços especiais para encomendas a partir de 150 €. Veja as Condições de revenda.\n\n## De onde vêm os artigos?\n\nImportamos diretamente do Brasil e da Nigéria, e também exportamos."
+   },
+   "rev": {
+    "t": "Condições de Revenda",
+    "x": "Somos importadores e exportadores de artigos de Umbanda, Candomblé e Ifá. Trazemos os artigos diretamente do Brasil e da Nigéria e fazemos revenda com preços especiais para profissionais: casas de culto, terreiros, lojas e revendedores.\n\n## Encomenda mínima\n\nOs preços especiais de revenda aplicam-se a encomendas a partir de 150 €.\n\n## Registo de revendedor\n\nRegiste-se na Área do Revendedor (menu do site). Depois de aprovado, vê os preços de revenda em todos os artigos sempre que tiver sessão iniciada.\n\n## Como pedir preços\n\nEnvie-nos por e-mail ({{email}}) ou WhatsApp o nome da entidade, o NIF, a atividade e a lista de artigos com as quantidades.\n\n[btn:Pedir preços de revenda por WhatsApp|wa:Olá! Gostaria de preços de revenda (encomenda a partir de 150 €). Entidade: ___ NIF: ___ Artigos e quantidades: ___]\n\n## Exportação\n\nTambém exportamos. Indique o país de destino no pedido para recebermos as condições e os portes.\n\n## Propostas e faturação\n\nRespondemos em 2 dias úteis com uma proposta. Os preços, os prazos e os portes dependem dos artigos e das quantidades. Emitimos fatura com o NIF do cliente.\n\n## Devoluções\n\nO direito de livre resolução de 14 dias aplica-se apenas a consumidores. As devoluções de artigos para revenda são acordadas na proposta."
+   },
+   "lit": {
+    "t": "Resolução de Litígios",
+    "x": "> Última atualização: 21 de novembro de 2026\n\n## Fale primeiro connosco\n\nSe algo correu mal, escreva para {{email}}. Queremos resolver o problema o mais depressa possível.\n\n## Livro de Reclamações\n\nPode apresentar uma reclamação no [Livro de Reclamações Eletrónico](https://www.livroreclamacoes.pt).\n\n## Resolução alternativa de litígios\n\nEm caso de litígio de consumo, o consumidor pode recorrer a uma entidade de resolução alternativa de litígios. A lista das entidades está no Portal do Consumidor, em [consumidor.gov.pt](https://www.consumidor.gov.pt).\n\n## Lei aplicável\n\nAplica-se a lei portuguesa. Os tribunais portugueses são competentes, sem prejuízo dos direitos do consumidor."
+   }
+  },
+  "tx": {}
  }
 };
