@@ -24,12 +24,12 @@ pre{white-space:pre-wrap;background:var(--bg);padding:10px;border-radius:8px;fon
 details>summary{cursor:pointer;padding:4px 0}
 .hint{color:var(--m);font-size:.85rem;margin:0 0 10px}
 </style></head><body>
-<header><b>OduOse · Painel</b><nav><button data-v="pr" class="on">Produtos</button><button data-v="bn">Banners</button><button data-v="tx">Textos</button><button data-v="cu">Cursos</button><button data-v="al">Alunos</button><button data-v="rd">Revenda</button><button data-v="od">Pedidos</button><button data-v="df">Definições</button><button data-v="pb">Publicar</button></nav></header>
+<header><b>OduOse · Painel</b><nav><button data-v="pr" class="on">Produtos</button><button data-v="pc">Preços</button><button data-v="bn">Banners</button><button data-v="tx">Textos</button><button data-v="cu">Cursos</button><button data-v="al">Alunos</button><button data-v="rd">Revenda</button><button data-v="od">Pedidos</button><button data-v="eq">Equipa</button><button data-v="df">Definições</button><button data-v="pb">Publicar</button></nav></header>
 <main>
 <div id="dft" class="bn" hidden>Tem alterações ainda não publicadas (guardadas neste dispositivo). <button class="btn g" id="dsc">Descartar</button></div>
 <section id="pr"><div class="row" style="margin-bottom:12px"><input id="q" placeholder="Pesquisar produto" style="margin:0"><button class="btn" id="nw" style="white-space:nowrap">+ Novo</button></div><div id="ls"></div></section>
 <section id="df" hidden><div class="card"><label>WhatsApp (com indicativo, sem +)</label><input id="c_wa" inputmode="numeric"><label>Utilizador PayPal.me</label><input id="c_paypal"><label>Número MB WAY</label><input id="c_mbway"><label>IBAN</label><input id="c_iban"><label>E-mail</label><input id="c_email" type="email"><label>Telefone (rodapé)</label><input id="c_tel"><label>Horário de atendimento</label><input id="c_horario"><label>Nome legal da empresa</label><input id="c_emp"><label>NIF</label><input id="c_nif"><label>Morada da sede</label><input id="c_morada"><label>Ligação Firebase (contas de cliente e pedidos): cole aqui a configuração do Firebase</label><textarea id="c_fb" rows="5" placeholder="const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"></textarea><p class="hint" id="fbs"></p><button class="btn" id="sc">Guardar definições</button></div></section>
-<section id="bn" hidden></section><section id="tx" hidden></section><section id="cu" hidden></section><section id="al" hidden></section><section id="rd" hidden></section>
+<section id="bn" hidden></section><section id="tx" hidden></section><section id="cu" hidden></section><section id="pc" hidden></section><section id="eq" hidden></section><section id="al" hidden></section><section id="rd" hidden></section>
 <section id="od" hidden><div id="odb"></div></section>
 <section id="pb" hidden>
 <div class="card"><h3 style="margin-top:0">Publicar direto (recomendado)</h3><p class="hint">Envia as alterações e as fotos para o GitHub, e o site atualiza sozinho em cerca de 1 minuto. Configuração única, veja o LEIA-ME.</p><label>Repositório (utilizador/nome)</label><input id="gr" placeholder="itsfabioguerreiro/oduose"><label>Token do GitHub</label><input id="gt" type="password" autocomplete="off"><label>Ramo</label><input id="gb" value="main"><label class="ck"><input type="checkbox" id="gk" checked> Lembrar neste dispositivo</label><button class="btn" id="go">Publicar agora</button><pre id="lg" hidden></pre></div>
@@ -409,7 +409,7 @@ D.site=mkSite(D.site);
 function sv(){try{localStorage.setItem("oduose_draft",JSON.stringify(D));$("dft").hidden=false}catch(e){alert("Sem espaço para guardar o rascunho neste dispositivo. Publique agora ou use fotos mais pequenas.")}}
 function eur(v){return Number(v).toFixed(2).replace(".",",")+" €"}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-document.querySelector("nav").onclick=function(e){var v=e.target.dataset.v;if(!v)return;["pr","bn","tx","cu","al","rd","df","pb","od"].forEach(function(k){$(k).hidden=k!==v});Array.prototype.forEach.call(this.children,function(b){b.classList.toggle("on",b.dataset.v===v)});CURV=v;if(v=="od")od();if(v=="bn")bnr();if(v=="tx")txr();if(v=="cu")cur_();if(v=="al")alr();if(v=="rd")rdr()};
+document.querySelector("nav").onclick=function(e){var v=e.target.dataset.v;if(!v)return;["pr","pc","eq","bn","tx","cu","al","rd","df","pb","od"].forEach(function(k){$(k).hidden=k!==v});Array.prototype.forEach.call(this.children,function(b){b.classList.toggle("on",b.dataset.v===v)});CURV=v;if(v=="od")od();if(v=="bn")bnr();if(v=="tx")txr();if(v=="cu")cur_();if(v=="al")alr();if(v=="rd")rdr();if(v=="pc")prr();if(v=="eq")eqr()};
 function ls(){var q=$("q").value.toLowerCase(),h="";D.prod.filter(function(p){return!q||(p.n+p.t+p.ty).toLowerCase().indexOf(q)>-1}).forEach(function(p){
 h+='<div class="card row"><div class="th" style="background-color:'+esc(p.c||"#ddd")+(p.img?';background-image:url('+esc(p.img)+')':'')+'"></div><div><b>'+esc(p.n)+'</b><br><span style="color:var(--m)">'+esc(p.t)+' · '+esc(p.ty)+'</span><br>'+eur(p.p)+(p.pc?' <span class="tg">-'+p.pc+'%</span>':'')+(p.nv?'<span class="tg">Novo</span>':'')+(p.esg?'<span class="tg">Esgotado</span>':'')+(p.img?'':'<span class="tg">Sem foto</span>')+'</div><button class="btn g" data-e="'+p.id+'">Editar</button></div>'});
 $("ls").innerHTML=h||'<p class="hint">Nenhum produto.</p>'}
@@ -563,10 +563,11 @@ if(t.dataset.tx){var d=TXL.filter(function(x){return x.k==t.dataset.tx})[0];D.si
 /* ===== eventos dos separadores novos ===== */
 document.addEventListener("input",function(e){var t=e.target;
 if(t.dataset&&t.dataset.ce!=null&&CE){spo(CE,t.dataset.ce,t.type=="checkbox"?t.checked:t.value)}
-if(t.id=="oq")hideBy($("odb"),t.value);if(t.id=="aq")hideBy($("al"),t.value)});
+if(t.id=="oq")hideBy($("odb"),t.value);if(t.id=="aq")hideBy($("al"),t.value);if(t.id=="pq")hideBy($("pc"),t.value)});
 document.addEventListener("change",async function(e){var t=e.target;if(!t.dataset)return;
 if(t.dataset.ce!=null&&CE)spo(CE,t.dataset.ce,t.type=="checkbox"?t.checked:t.value);
 if(t.dataset.ceimg!=null&&t.files&&t.files[0])rz(t.files[0],function(u){CE.img=u;cue()},700,.72);
+if(t.dataset.co){try{await coSave(t.dataset.id)}catch(x){alert("Não foi possível guardar.")}}
 if(t.dataset.oid){try{await FBA.set("pedidos",t.dataset.oid,{estado:t.value},1)}catch(x){alert("Não foi possível atualizar o estado.")}}
 if(t.dataset.mat){var uid=t.dataset.mat,arr=[];Array.prototype.forEach.call(document.querySelectorAll('[data-mat="'+uid+'"]'),function(c){if(c.checked)arr.push(c.value)});try{await FBA.set("alunos",uid,{mat:arr},1)}catch(x){alert("Não foi possível guardar a matrícula.");t.checked=!t.checked}}});
 document.addEventListener("click",async function(e){var t=e.target.closest("[data-x]");if(!t)return;var x=t.dataset.x,i=+t.dataset.i,j=+t.dataset.j;
@@ -589,11 +590,49 @@ else if(x=="cu.save")await cuSave();
 else if(x=="cu.del"){if(confirm("Apagar este curso? As matrículas e o progresso dos alunos deixam de funcionar.")){await FBA.del("conteudo",CE.id);await FBA.del("cursos",CE.id);CE=null;cur_()}}
 else if(x=="al.ref")alr();
 else if(x=="rd.ref")rdr();
+else if(x=="pc.save")await pcSave();
+else if(x=="eq.del"){if(confirm("Remover este colaborador?")){await FBA.del("colaboradores",t.dataset.id);eqr()}}
 else if(x=="rd.ap"||x=="rd.rv"){await FBA.set("revendedores",t.dataset.id,{aprovado:x=="rd.ap"},1);rdr()}
 else if(x=="rd.apl"){var d=num($("rdesc").value);if(d==null||d<0||d>95){alert("Indique um desconto entre 0 e 95.");return}Array.prototype.forEach.call(document.querySelectorAll("[data-rpid]"),function(n){n.value=(parseFloat(n.dataset.np)*(1-d/100)).toFixed(2)})}
 else if(x=="rd.save"){var pm={};Array.prototype.forEach.call(document.querySelectorAll("[data-rpid]"),function(n){var v=num(n.value);if(v!=null&&v>=0)pm[n.dataset.rpid]=v});var mn=num($("rmin").value);await FBA.set("revenda","precos",{p:pm,min:mn==null?150:mn});alert("Preços de revenda guardados.")}
 }catch(er){alert("Erro: "+(er.code||er.message))}});
-window.odr=function(){if(CURV=="od")od();if(CURV=="cu")cur_();if(CURV=="al")alr();if(CURV=="rd")rdr()};
+/* ===== equipa (colaboradores) e precos ===== */
+var WHO={t:"?",perm:{}};
+async function who(){var u=window.FBA&&FBA.user();if(!u){WHO={t:"?",perm:{}};navu();return}
+try{await FBA.list("colaboradores");WHO={t:"dono",perm:{}}}catch(e){var c=null;try{c=await FBA.get("colaboradores",u.uid)}catch(x){}WHO=c&&c.ativo?{t:"col",perm:c.perm||{}}:{t:"nenhum",perm:{}}}
+navu()}
+function navu(){var first=null,ok=false;Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){var v=b.dataset.v,show=true;if(WHO.t=="col")show=(v=="od"&&!!WHO.perm.pedidos)||(v=="pc"&&!!WHO.perm.precos);b.style.display=show?"":"none";if(show&&!first)first=b;if(show&&v==CURV)ok=true});
+if(WHO.t=="col"&&!ok&&first)first.click()}
+async function eqr(){var b=$("eq");if(!ready(b))return;b.innerHTML='<p class="hint">A carregar…</p>';var L;
+try{L=await FBA.list("colaboradores")}catch(e){b.innerHTML=NOPERM;return}
+b.innerHTML='<p class="hint">O colaborador pede acesso na conta dele (menu da conta, "Pedir acesso de colaborador"). Aqui ativa-o e escolhe o que pode fazer. O colaborador nunca vê as definições, o token do GitHub nem as contas dos outros.</p>'+
+(L.map(function(c){var p=c.perm||{},i=esc(c.id);return '<div class="card"><b>'+esc(c.n||c.e)+'</b> <span class="tg" style="background:'+(c.ativo?"#d6f1de":"#fde7c8")+'">'+(c.ativo?"Ativo":"Pendente")+'</span><br><span style="color:var(--m)">'+esc(c.e)+'</span>'+
+'<label class="ck"><input type="checkbox" data-co="ativo" data-id="'+i+'"'+(c.ativo?" checked":"")+'> Ativo</label>'+
+'<label class="ck"><input type="checkbox" data-co="pedidos" data-id="'+i+'"'+(p.pedidos?" checked":"")+'> Ver pedidos e mudar o estado</label>'+
+'<label class="ck"><input type="checkbox" data-co="precos" data-id="'+i+'"'+(p.precos?" checked":"")+'> Alterar preços, descontos, preços de revenda e esgotados</label>'+
+'<div class="bar"><button class="btn d sm" data-x="eq.del" data-id="'+i+'">Remover colaborador</button></div></div>'}).join("")||'<div class="card">Ainda não há colaboradores.</div>')}
+async function coSave(id){var q=function(k){var n=document.querySelector('[data-co="'+k+'"][data-id="'+id+'"]');return !!(n&&n.checked)};
+await FBA.set("colaboradores",id,{ativo:q("ativo"),perm:{pedidos:q("pedidos"),precos:q("precos")}},1);eqr()}
+async function prr(){var b=$("pc");if(!ready(b))return;b.innerHTML='<p class="hint">A carregar…</p>';var o=null,r=null;
+try{o=await FBA.get("precos","atual")}catch(e){}
+try{r=await FBA.get("revenda","precos")}catch(e){}
+o=o||{};var op=o.p||{},oc=o.pc||{},oe=o.esg||{},rp=(r&&r.p)||{};
+b.innerHTML='<p class="hint">Altere preços, descontos, preços de revenda e artigos esgotados. Estes valores passam a ter prioridade sobre os do separador Produtos e aparecem no site logo depois de guardar.</p><input id="pq" placeholder="Procurar artigo…" style="margin-bottom:10px"><div id="plist">'+
+D.prod.map(function(p){var k=p.id;return '<div class="card" data-s="'+esc((p.n+" "+p.t).toLowerCase())+'"><b>'+esc(p.n)+'</b> <small style="color:var(--m)">'+esc(p.t)+'</small><div class="row"><div style="flex:1"><label>Preço (€)</label><input data-pp="'+k+'" inputmode="decimal" value="'+esc(op[k]!=null?op[k]:p.p)+'"></div><div style="flex:1"><label>Desconto (%)</label><input data-pd="'+k+'" inputmode="decimal" value="'+esc(oc[k]!=null?oc[k]:(p.pc||0))+'"></div><div style="flex:1"><label>Revenda (€)</label><input data-pr="'+k+'" inputmode="decimal" value="'+esc(rp[k]!=null?rp[k]:"")+'" placeholder="normal"></div></div><label class="ck"><input type="checkbox" data-pe="'+k+'"'+((oe[k]!=null?oe[k]:p.esg)?" checked":"")+'> Esgotado</label></div>'}).join("")+'</div><button class="btn" data-x="pc.save">Guardar valores</button>';
+PRC={rev:r}}
+var PRC=null;
+async function pcSave(){var P_={},D_={},E_={},R_={},bad=0;
+Array.prototype.forEach.call(document.querySelectorAll("[data-pp]"),function(n){var v=num(n.value);if(v!=null&&v>=0)P_[n.dataset.pp]=v;else bad++});
+Array.prototype.forEach.call(document.querySelectorAll("[data-pd]"),function(n){var v=num(n.value);if(v!=null&&v>=0&&v<=95)D_[n.dataset.pd]=v;else if(n.value.trim()!=="")bad++});
+Array.prototype.forEach.call(document.querySelectorAll("[data-pr]"),function(n){var v=num(n.value);if(v!=null&&v>=0)R_[n.dataset.pr]=v});
+Array.prototype.forEach.call(document.querySelectorAll("[data-pe]"),function(n){E_[n.dataset.pe]=n.checked});
+if(bad){alert("Há valores inválidos. Use números (preço positivo, desconto entre 0 e 95).");return}
+await FBA.set("precos","atual",{p:P_,pc:D_,esg:E_});
+var mn=(PRC&&PRC.rev&&PRC.rev.min)||150;
+try{await FBA.set("revenda","precos",{p:R_,min:mn})}catch(e){alert("Preços normais guardados, mas não foi possível guardar os de revenda.");return}
+alert("Guardado. O site mostra os novos valores logo.")}
+window.odr=async function(){await who();if(CURV=="od")od();if(CURV=="cu")cur_();if(CURV=="al")alr();if(CURV=="rd")rdr();if(CURV=="pc")prr();if(CURV=="eq")eqr()};
+
 
 cf();ls();
 </script><script type="module">

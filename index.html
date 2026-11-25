@@ -615,26 +615,30 @@ return h+(ul?"</ul>":"")}
 function U(k){return S.ui&&S.ui[k]!=null&&S.ui[k]!==""?S.ui[k]:DEFS.ui[k]}
 
 /* ===== perfis: cliente, aluno, revendedor, dono ===== */
-var ROLE={al:null,rv:null},RP=null,RMIN=150,OWNER=false;
+var ROLE={al:null,rv:null,col:null},RP=null,RMIN=150,OWNER=false,STAFF=false,PL=0;
+function applyPrecos(o){P.forEach(function(x){var k=x.id;if(o.p&&o.p[k]!=null&&!isNaN(+o.p[k]))x.p=+o.p[k];if(o.pc&&o.pc[k]!=null&&!isNaN(+o.pc[k]))x.pc=+o.pc[k];x.old=x.pc?Math.round(x.p/(1-x.pc/100)*100)/100:0;if(o.esg&&o.esg[k]!=null)x.esg=!!o.esg[k]})}
 function RV(){return !!(ROLE.rv&&ROLE.rv.aprovado&&RP)}
 function PR(x){return RV()&&RP[x.id]!=null&&RP[x.id]!==""&&!isNaN(+RP[x.id])?+RP[x.id]:x.p}
 function pold(x){return RV()&&PR(x)<x.p?x.p:x.old}
 async function getProf(){var u=ful();return u?((await FB.get("clientes",u.uid))||{}):{}}
-async function roles(){var u=ful();ROLE={al:null,rv:null};RP=null;OWNER=false;if(!u)return;
+async function roles(){var u=ful();ROLE={al:null,rv:null,col:null};RP=null;OWNER=false;STAFF=false;if(!u)return;
 try{PROF=await getProf()}catch(e){}
 try{ROLE.al=await FB.get("alunos",u.uid)}catch(e){}
 try{ROLE.rv=await FB.get("revendedores",u.uid);if(ROLE.rv&&ROLE.rv.aprovado){var d=await FB.get("revenda","precos");if(d){RP=d.p||{};RMIN=+d.min||150}}}catch(e){}
-try{OWNER=await FB.probe()}catch(e){}}
-function UI(){lists();grid();render();$("pnb").style.display=OWNER?"flex":"none";
+try{ROLE.col=await FB.get("colaboradores",u.uid)}catch(e){}
+try{OWNER=await FB.probe()}catch(e){}
+STAFF=!!(OWNER||(ROLE.col&&ROLE.col.ativo))}
+function UI(){lists();grid();render();$("pnb").style.display=STAFF?"flex":"none";
 if($("ac").classList.contains("open"))acr();
 if($("cs").classList.contains("open"))csr();
 if($("lg").classList.contains("open")&&$("lt").dataset.k=="rva")rvr()}
-window.onAuth=async function(u){PROF={};if(!u){AM="in";CS.cid=null;CS.cont=null}await roles();UI()};
+window.onAuth=async function(u){PROF={};if(!u){AM="in";CS.cid=null;CS.cont=null}if(!PL){PL=1;try{var po=await FB.get("precos","atual");if(po)applyPrecos(po)}catch(e){}}await roles();UI()};
 async function regCli(n,e,p){var u=await FB.mk(n,e,p);var c=await FB.get("clientes",u.uid);if(!c)await FB.set("clientes",u.uid,{n:n,t:"",d:""});await roles();UI()}
 function rolesHtml(){var h="";
-if(OWNER)h+='<button class="btn" data-ac="pn" style="width:100%;margin:6px 0">Abrir painel do dono</button>';
+if(STAFF)h+='<button class="btn" data-ac="pn" style="width:100%;margin:6px 0">Abrir painel</button>';
 if(ROLE.al)h+='<button class="add" data-ac="cs" style="margin:6px 6px 0 0">Área de alunos</button>';
 h+='<button class="add" data-ac="rv" style="margin:6px 0 0">'+(ROLE.rv?(ROLE.rv.aprovado?"Revendedor aprovado":"Revenda: em análise"):"Registar como revendedor")+'</button>';
+if(ROLE.col)h+='<div class="pi" style="min-height:0">Colaborador: '+(ROLE.col.ativo?'ativo':'pedido em análise')+'</div>';else if(!OWNER)h+='<button class="add" data-ac="co" style="margin:6px 0 0 6px">Pedir acesso de colaborador</button>';
 return '<div style="margin:10px 0">'+h+'</div>'}
 
 /* ===== painel do dono dentro do site ===== */
@@ -758,7 +762,7 @@ $("ab").onclick=async function(e){var a=e.target.dataset.ac;if(!a)return;
 if(a=="sw"){AM=AM=="reg"?"in":"reg";acr()}
 if(a=="rst"){var em=$("le")?$("le").value.trim():"";if(!em){msg("Escreva o seu e-mail acima.");return}try{await window.FB.reset(em);msg("Enviámos-lhe um e-mail para repor a palavra-passe.",1)}catch(er){msg(fe(er.code))}}
 if(a=="out"){await window.FB.out()}
-if(a=="pn"){ac(false);pnl(true)}if(a=="cs"){ac(false);cso()}if(a=="rv"){ac(false);rvo()}if(a=="del"){ACC={};asave();acr()}};
+if(a=="co"){var cu=ful();if(cu&&!ROLE.col){try{await FB.set("colaboradores",cu.uid,{n:(PROF&&PROF.n)||cu.displayName||"",e:cu.email,ativo:false,perm:{pedidos:false,precos:false},c:Date.now()});await roles();UI();alert("Pedido enviado. O dono tem de o aprovar.")}catch(er){alert("Não foi possível enviar o pedido.")}}}if(a=="pn"){ac(false);pnl(true)}if(a=="cs"){ac(false);cso()}if(a=="rv"){ac(false);rvo()}if(a=="del"){ACC={};asave();acr()}};
 </script><script type="module">
 const C=(window.DADOS.cfg||{}).firebase;
 if(C&&C.apiKey){try{
