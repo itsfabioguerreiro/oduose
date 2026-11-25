@@ -425,7 +425,7 @@ window.DADOS={
    "s": "Conhecimento....",
    "x": "Fundamento e tradição para si e para quem o rodeia",
    "f": "Amuletos e cristais",
-   "img": "fotos/b-b1-1795551128648.jpg"
+   "img": ""
   },
   "b2": {
    "t": "GUIAS DE ORIXÁ",
