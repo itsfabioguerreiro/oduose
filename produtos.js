@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 30,
+   "n": "Efun",
+   "t": "Ifá",
+   "ty": "Velas e ervas",
+   "d": "Efun",
+   "p": 5,
+   "pc": 0,
+   "nv": false,
+   "esg": false,
+   "img": "fotos/p30-1795696051173.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 29,
    "n": "Pingente Espelho Luxo",
    "t": "Umbanda",
