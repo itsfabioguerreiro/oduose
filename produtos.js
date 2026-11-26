@@ -21,6 +21,36 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 32,
+   "n": "Ileke Ifa Grosso",
+   "t": "Ifá",
+   "ty": "Guias e pulseiras",
+   "d": "Ileke Ifa Grosso",
+   "p": 12,
+   "pc": 16,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p32-1795697008395.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
+   "id": 31,
+   "n": "Ileke Esu Grosso",
+   "t": "Ifá",
+   "ty": "Guias e pulseiras",
+   "d": "Ileke Esu Grosso",
+   "p": 12,
+   "pc": 16,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p31-1795697011473.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 30,
    "n": "Efun",
    "t": "Ifá",
