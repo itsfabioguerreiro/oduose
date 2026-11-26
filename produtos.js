@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 37,
+   "n": "Banha de Ori",
+   "t": "Candomblé",
+   "ty": "Velas e ervas",
+   "d": "Banha de Ori - Vegetal",
+   "p": 3.99,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p37-1795700757013.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 36,
    "n": "Caboclo Pena Branca 20cm",
    "t": "Umbanda",
@@ -29,7 +44,7 @@ window.DADOS={
    "p": 30,
    "pc": 0,
    "nv": true,
-   "esg": false,
+   "esg": true,
    "img": "fotos/p36-1795700451321.jpg",
    "k": "box",
    "a": "#8c7bf0",
