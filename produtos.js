@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 33,
+   "n": "Idé Ifá c/ Ikin",
+   "t": "Ifá",
+   "ty": "Guias e pulseiras",
+   "d": "Idé Ifa c/ Ikin 4 olhos",
+   "p": 8,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p33-1795697126319.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 32,
    "n": "Ileke Ifa Grosso",
    "t": "Ifá",
