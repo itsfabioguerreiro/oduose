@@ -255,7 +255,7 @@ window.DADOS={
    "pc": 0,
    "nv": false,
    "esg": false,
-   "img": "",
+   "img": "fotos/p15-1795694313114.jpg",
    "k": "powder",
    "a": "#f1e1b0",
    "c": "#d9c7a8"
