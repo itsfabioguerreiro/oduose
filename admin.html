@@ -29,7 +29,7 @@ details>summary{cursor:pointer;padding:4px 0}
 <div id="dft" class="bn" hidden>Tem alterações ainda não publicadas (guardadas neste dispositivo). <button class="btn g" id="dsc">Descartar</button></div>
 <section id="pr"><div class="row" style="margin-bottom:12px"><input id="q" placeholder="Pesquisar produto" style="margin:0"><button class="btn" id="nw" style="white-space:nowrap">+ Novo</button></div><div id="ls"></div></section>
 <section id="df" hidden><div class="card"><label>WhatsApp (com indicativo, sem +)</label><input id="c_wa" inputmode="numeric"><label>Utilizador PayPal.me</label><input id="c_paypal"><label>Número MB WAY</label><input id="c_mbway"><label>IBAN</label><input id="c_iban"><label>E-mail</label><input id="c_email" type="email"><label>Telefone (rodapé)</label><input id="c_tel"><label>Horário de atendimento</label><input id="c_horario"><label>Nome legal da empresa</label><input id="c_emp"><label>NIF</label><input id="c_nif"><label>Morada da sede</label><input id="c_morada"><label>Ligação Firebase (contas de cliente e pedidos): cole aqui a configuração do Firebase</label><textarea id="c_fb" rows="5" placeholder="const firebaseConfig = { apiKey: &quot;...&quot;, authDomain: &quot;...&quot;, projectId: &quot;...&quot;, appId: &quot;...&quot; };"></textarea><p class="hint" id="fbs"></p><button class="btn" id="sc">Guardar definições</button></div></section>
-<section id="bn" hidden></section><section id="tx" hidden></section><section id="cu" hidden></section><section id="pc" hidden></section><section id="eq" hidden></section><section id="al" hidden></section><section id="rd" hidden></section>
+<section id="gate"></section><section id="bn" hidden></section><section id="tx" hidden></section><section id="cu" hidden></section><section id="pc" hidden></section><section id="eq" hidden></section><section id="al" hidden></section><section id="rd" hidden></section>
 <section id="od" hidden><div id="odb"></div></section>
 <section id="pb" hidden>
 <div class="card"><h3 style="margin-top:0">Publicar direto (recomendado)</h3><p class="hint">Envia as alterações e as fotos para o GitHub, e o site atualiza sozinho em cerca de 1 minuto. Configuração única, veja o LEIA-ME.</p><label>Repositório (utilizador/nome)</label><input id="gr" placeholder="itsfabioguerreiro/oduose"><label>Token do GitHub</label><input id="gt" type="password" autocomplete="off"><label>Ramo</label><input id="gb" value="main"><label class="ck"><input type="checkbox" id="gk" checked> Lembrar neste dispositivo</label><button class="btn" id="go">Publicar agora</button><pre id="lg" hidden></pre></div>
@@ -621,11 +621,26 @@ var WHO={t:"?",perm:{}},EQMSG="";
 var PERMS=[["ped_ver","Ver pedidos"],["ped_estado","Mudar o estado dos pedidos"],["precos","Alterar preços, descontos e artigos esgotados"],["rev_precos","Alterar preços de revenda"],["rev_aprovar","Aprovar revendedores"],["cursos","Gerir cursos, aulas e materiais"],["alunos","Ver alunos e atribuir matrículas"]];
 var TABP={od:["ped_ver","ped_estado"],pc:["precos","rev_precos"],rd:["rev_aprovar","rev_precos"],cu:["cursos"],al:["alunos"]};
 function can(k){return WHO.t!="col"||!!WHO.perm[k]}
-async function who(){var u=window.FBA&&FBA.user();if(!u){WHO={t:"?",perm:{}};navu();return}
-try{await FBA.list("colaboradores");WHO={t:"dono",perm:{}}}catch(e){var c=null;try{c=await FBA.get("colaboradores",u.uid)}catch(x){}WHO=c&&c.ativo?{t:"col",perm:c.perm||{}}:{t:"nenhum",perm:{}}}
+function fbOn(){var C=D.cfg&&D.cfg.firebase;return !!(C&&C.apiKey)}
+var SECS=["pr","pc","eq","bn","tx","cu","al","rd","df","pb","od"];
+async function who(){var u=window.FBA&&FBA.user();
+if(!fbOn()){WHO={t:"dono",perm:{}};navu();return}
+if(!u){WHO={t:"?",perm:{}};navu();return}
+var c=null;try{c=await FBA.get("colaboradores",u.uid)}catch(e){}
+if(c)WHO=c.ativo?{t:"col",perm:c.perm||{}}:{t:"nenhum",perm:{}};
+else{try{await FBA.list("pedidos");WHO={t:"dono",perm:{}}}catch(e){WHO={t:"nenhum",perm:{}}}}
 navu()}
-function navu(){var first=null,ok=false;Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){var v=b.dataset.v,show=true;if(WHO.t=="col")show=!!TABP[v]&&TABP[v].some(function(k){return !!WHO.perm[k]});b.style.display=show?"":"none";if(show&&!first)first=b;if(show&&v==CURV)ok=true});
-if(WHO.t=="col"&&!ok&&first)first.click()}
+function navu(){if(!fbOn())WHO={t:"dono",perm:{}};var ok=WHO.t=="dono"||WHO.t=="col",g=$("gate"),first=null,curb=null;
+Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){var v=b.dataset.v,show=WHO.t=="dono"||(WHO.t=="col"&&!!TABP[v]&&TABP[v].some(function(k){return !!WHO.perm[k]}));b.style.display=show?"":"none";if(show&&!first)first=b;if(show&&v==CURV)curb=b});
+var lo=$("lo");if(lo)lo.style.display=(fbOn()&&window.FBA&&FBA.user())?"block":"none";
+if(!ok){SECS.forEach(function(s){var n=$(s);if(n)n.hidden=true});g.hidden=false;
+if(window.FBA&&FBA.user())g.innerHTML='<div class="card"><b>Esta conta não tem acesso ao painel.</b><p class="hint">Peça ao dono da loja para criar ou ativar o seu acesso de colaborador.</p><button class="btn g sm" data-x="out">Sair</button></div>';
+else if(window.FBA)ready(g);
+else g.innerHTML='<div class="card">A ligar ao Firebase…</div>';
+return}
+g.hidden=true;(curb||first)&&(curb||first).click()}
+navu();
+setTimeout(function(){if(fbOn()&&!window.FBA&&$("gate"))$("gate").innerHTML='<div class="card">Não foi possível ligar ao Firebase. Verifique a ligação e <button class="btn g sm" onclick="location.reload()">tente de novo</button>.</div>'},8000);
 async function eqr(){var b=$("eq");if(!ready(b))return;b.innerHTML='<p class="hint">A carregar…</p>';var L;
 try{L=await FBA.list("colaboradores")}catch(e){b.innerHTML=NOPERM;return}
 var pk=function(id,p,pre){return PERMS.map(function(x){return '<label class="ck"><input type="checkbox" '+(pre?'id="'+pre+x[0]+'"':'data-co="'+x[0]+'" data-id="'+id+'"')+((p&&p[x[0]])?" checked":"")+'> '+x[1]+'</label>'}).join("")};
@@ -680,4 +695,5 @@ list:async(c)=>{const s=await FS.getDocs(FS.collection(db,c));return s.docs.map(
 AU.onAuthStateChanged(auth,()=>{if(window.odr)window.odr()});
 }catch(e){console.error(e)}}
 </script>
+<button id="lo" class="btn g sm" data-x="out" style="position:fixed;top:8px;right:10px;z-index:5;display:none">Sair</button>
 </body></html>
