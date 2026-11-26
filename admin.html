@@ -472,6 +472,7 @@ sv();bnr()};
 var EST=["Novo","Pago","Enviado","Concluído","Cancelado"];
 /* ===== utilitarios ===== */
 var CURV="pr";
+function unm(v){v=String(v||"").trim();return v.indexOf("@")>-1?v:v.toLowerCase().replace(/[^a-z0-9._-]/g,"")+"@colab.oduose.pt"}
 function rz(f,cb,max,q){max=max||1400;q=q||.78;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var w=Math.min(max,im.width),h=Math.round(im.height*w/im.width),c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(im,0,0,w,h);cb(c.toDataURL("image/jpeg",q))};im.onerror=function(){alert("Não foi possível ler esta imagem.")};im.src=r.result};r.readAsDataURL(f)}
 function gpo(o,p){var a=p.split("."),x=o;for(var i=0;i<a.length;i++){if(x==null)return"";x=x[a[i]]}return x==null?"":x}
 function spo(o,p,v){var a=p.split("."),x=o;for(var i=0;i<a.length-1;i++)x=x[a[i]];x[a[a.length-1]]=v}
@@ -479,9 +480,9 @@ function nid(){return Math.random().toString(36).slice(2,9)}
 function ready(el){var C=D.cfg.firebase;
 if(!C||!C.apiKey){el.innerHTML='<div class="card">Ligue primeiro o Firebase em Definições e publique.</div>';return false}
 if(!window.FBA){el.innerHTML='<div class="card">A ligar ao Firebase… Se esta mensagem não desaparecer, recarregue a página.</div>';return false}
-if(!FBA.user()){el.innerHTML='<div class="card"><h3 style="margin-top:0">Entrar como dono da loja</h3><p class="hint" id="oe"></p><form class="olf"><input name="e" type="email" placeholder="E-mail" required><input name="p" type="password" placeholder="Palavra-passe" required><button class="btn">Entrar</button></form></div>';return false}
+if(!FBA.user()){el.innerHTML='<div class="card"><h3 style="margin-top:0">Entrar como dono da loja</h3><p class="hint" id="oe"></p><form class="olf"><input name="e" type="text" autocapitalize="off" autocomplete="username" placeholder="Utilizador ou e-mail" required><input name="p" type="password" placeholder="Palavra-passe" required><button class="btn">Entrar</button></form></div>';return false}
 return true}
-document.addEventListener("submit",async function(e){if(!e.target.classList||!e.target.classList.contains("olf"))return;e.preventDefault();try{await FBA.login(e.target.e.value.trim(),e.target.p.value)}catch(x){var o=$("oe");if(o)o.textContent="E-mail ou palavra-passe incorretos."}});
+document.addEventListener("submit",async function(e){if(!e.target.classList||!e.target.classList.contains("olf"))return;e.preventDefault();try{await FBA.login(unm(e.target.e.value),e.target.p.value)}catch(x){var o=$("oe");if(o)o.textContent="E-mail ou palavra-passe incorretos."}});
 var NOPERM='<div class="card">Sem permissão. Confirme que entrou com a conta do dono e que publicou as regras novas (ficheiro firestore.rules) na consola do Firebase.<br><button class="btn g sm" data-x="out" style="margin-top:10px">Sair</button></div>';
 function ts(o){return o.criado&&o.criado.toMillis?o.criado.toMillis():0}
 function hideBy(box,q){q=q.toLowerCase();Array.prototype.forEach.call(box.querySelectorAll("[data-s]"),function(n){n.style.display=!q||n.dataset.s.indexOf(q)>-1?"":"none"})}
@@ -496,7 +497,7 @@ var A=Object.keys(G).map(function(k){return G[k]}).sort(function(a,b){return b.l
 b.innerHTML='<div class="row" style="margin-bottom:10px"><b>'+A.length+' utilizadores · '+ORDS.length+' pedidos</b><button class="btn g" data-x="od.ref">Atualizar</button><button class="btn g" data-x="out">Sair</button></div><input id="oq" placeholder="Procurar por nome, e-mail ou telemóvel…" style="margin-bottom:10px"><div id="olist">'+
 (A.map(function(g){g.l.sort(function(x,y){return ts(y)-ts(x)});var nv=g.l.filter(function(o){return o.estado=="Novo"}).length;
 return '<details class="card" data-s="'+esc((g.n+" "+g.e+" "+g.t).toLowerCase())+'"><summary><b>'+esc(g.n||g.e||"Sem nome")+'</b>'+(g.rv?' <span class="tg">Revenda</span>':'')+(nv?' <span class="tg" style="background:#fde7c8">'+nv+' novo(s)</span>':'')+'<br><span style="color:var(--m)">'+esc(g.e)+' · '+esc(g.t)+' · '+g.l.length+' pedido(s) · '+eur(g.tot)+'</span></summary><p class="hint">'+esc(g.d)+'</p>'+
-g.l.map(function(o){return '<div class="card" style="background:#fafafa"><b>'+esc(o.criado&&o.criado.toDate?o.criado.toDate().toLocaleString("pt-PT"):"")+'</b> — '+eur(o.total)+' · '+esc(o.pagamento)+(o.tipo=="revenda"?' · <span class="tg">Revenda</span>':'')+'<br>'+(o.itens||[]).map(function(i){return esc(i.q+"x "+i.n)}).join(", ")+'<br><label>Estado</label><select data-oid="'+esc(o.id)+'">'+EST.map(function(s){return '<option'+(s===o.estado?" selected":"")+'>'+s+'</option>'}).join("")+'</select></div>'}).join("")+'</details>'}).join("")||'<div class="card">Ainda não há pedidos.</div>')+'</div>'}
+g.l.map(function(o){return '<div class="card" style="background:#fafafa"><b>'+esc(o.criado&&o.criado.toDate?o.criado.toDate().toLocaleString("pt-PT"):"")+'</b> — '+eur(o.total)+' · '+esc(o.pagamento)+(o.tipo=="revenda"?' · <span class="tg">Revenda</span>':'')+'<br>'+(o.itens||[]).map(function(i){return esc(i.q+"x "+i.n)}).join(", ")+'<br><label>Estado</label><select data-oid="'+esc(o.id)+'"'+(can("ped_estado")?"":" disabled")+'>'+EST.map(function(s){return '<option'+(s===o.estado?" selected":"")+'>'+s+'</option>'}).join("")+'</select></div>'}).join("")+'</details>'}).join("")||'<div class="card">Ainda não há pedidos.</div>')+'</div>'}
 
 /* ===== cursos ===== */
 var CUL=[],CE=null;
@@ -504,24 +505,40 @@ async function cur_(){var b=$("cu");if(!ready(b))return;if(CE){cue();return}
 b.innerHTML='<p class="hint">A carregar cursos…</p>';
 try{CUL=await FBA.list("cursos");CUL.sort(function(a,b){return(a.ordem||0)-(b.ordem||0)})}catch(e){b.innerHTML=NOPERM;return}
 b.innerHTML='<div class="row" style="margin-bottom:10px"><b>'+CUL.length+' cursos</b><button class="btn" data-x="cu.new">+ Novo curso</button></div>'+(CUL.map(function(c){return '<div class="card"><b>'+esc(c.t)+'</b> '+(c.pub===false?'<span class="tg">Oculto</span>':'')+'<br><span style="color:var(--m)">'+esc(c.p||"")+' · '+(c.nm||0)+' módulos · '+(c.na||0)+' aulas · '+(c.acesso=="livre"?"aberto a todos os alunos":"só com matrícula")+'</span><div class="bar"><button class="btn g sm" data-x="cu.edit" data-id="'+esc(c.id)+'">Editar</button></div></div>'}).join("")||'<div class="card">Ainda não há cursos. Toque em "+ Novo curso".</div>')}
-async function cuEdit(id){var c=CUL.filter(function(x){return x.id==id})[0],d=null;try{d=await FBA.get("conteudo",id)}catch(e){}CE=Object.assign({},c,{mods:(d&&d.mods)||[]});cue()}
-function cuNew(){CE={id:"c"+Date.now().toString(36),t:"",d:"",p:"",img:"",acesso:"matricula",pub:true,ordem:CUL.length+1,mods:[],novo:true};cue()}
+async function cuEdit(id){var c=CUL.filter(function(x){return x.id==id})[0],d=null;try{d=await FBA.get("conteudo",id)}catch(e){}CE=Object.assign({},c,{mods:(d&&d.mods)||[],sobre:(d&&d.sobre)||""});cue()}
+function cuNew(){CE={id:"c"+Date.now().toString(36),t:"",d:"",p:"",img:"",acesso:"matricula",pub:true,ordem:CUL.length+1,mods:[],sobre:"",novo:true};cue()}
 function cf_(l,p,ta){var v=gpo(CE,p);return '<label>'+l+'</label>'+(ta?'<textarea rows="'+ta+'" data-ce="'+p+'">'+esc(v)+'</textarea>':'<input data-ce="'+p+'" value="'+esc(v)+'">')}
 function cue(){var b=$("cu"),y=window.scrollY;
-var h='<div class="card"><button class="btn g sm" data-x="cu.back">← Voltar à lista</button><h3>'+(CE.novo?"Novo curso":"Editar curso")+'</h3>'+cf_("Título","t")+cf_("Descrição curta","d",2)+cf_("Preço (texto, por exemplo 49 €)","p")+
+var h='<div class="card"><button class="btn g sm" data-x="cu.back">← Voltar à lista</button><h3>'+(CE.novo?"Novo curso":"Editar curso")+'</h3>'+cf_("Título","t")+cf_("Descrição curta","d",2)+cf_("Preço (texto, por exemplo 49 €)","p")+cf_("Sobre o curso (só os alunos veem)","sobre",4)+
 '<label>Quem pode ver as aulas</label><select data-ce="acesso"><option value="matricula"'+(CE.acesso!="livre"?" selected":"")+'>Só alunos matriculados (atribui em Alunos)</option><option value="livre"'+(CE.acesso=="livre"?" selected":"")+'>Todos os alunos registados</option></select><label class="ck"><input type="checkbox" data-ce="pub"'+(CE.pub!==false?" checked":"")+'> Visível na lista de cursos</label>'+
 '<div class="bth" style="'+(CE.img?"background-image:url("+esc(CE.img)+")":"")+'"></div><label>Imagem do curso</label><input type="file" accept="image/*" data-ceimg>'+(CE.img?'<button class="btn g sm" data-x="cu.rmimg">Remover imagem</button>':"")+'</div>';
 CE.mods.forEach(function(m,i){var p="mods."+i;
 h+='<div class="card" style="border-left:4px solid #1d3df0"><label>Módulo '+(i+1)+'</label><input data-ce="'+p+'.t" value="'+esc(m.t)+'" placeholder="Nome do módulo">';
 (m.aulas||[]).forEach(function(a,j){var q=p+".aulas."+j;
-h+='<div class="card" style="background:#fafafa"><label>Aula '+(j+1)+'</label><input data-ce="'+q+'.t" value="'+esc(a.t)+'" placeholder="Título da aula"><label>Tipo</label><select data-ce="'+q+'.tipo">'+[["video","Vídeo"],["texto","Só texto"],["link","Material (link)"]].map(function(o){return '<option value="'+o[0]+'"'+((a.tipo||"video")==o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select><label>Link do vídeo ou do material (YouTube, Vimeo, Google Drive ou ficheiro mp4)</label><input data-ce="'+q+'.url" value="'+esc(a.url)+'" placeholder="https://"><label>Duração (opcional)</label><input data-ce="'+q+'.dur" value="'+esc(a.dur)+'" placeholder="12 min"><label>Texto da aula (opcional)</label><textarea rows="4" data-ce="'+q+'.txt">'+esc(a.txt)+'</textarea><div class="bar"><button class="btn g sm" data-x="cu.au.up" data-i="'+i+'" data-j="'+j+'">↑</button><button class="btn g sm" data-x="cu.au.dn" data-i="'+i+'" data-j="'+j+'">↓</button><button class="btn d sm" data-x="cu.au.del" data-i="'+i+'" data-j="'+j+'">Apagar aula</button></div></div>'});
+h+='<div class="card" style="background:#fafafa"><label>Aula '+(j+1)+'</label><input data-ce="'+q+'.t" value="'+esc(a.t)+'" placeholder="Título da aula"><label>Tipo</label><select data-ce="'+q+'.tipo">'+[["video","Vídeo"],["texto","Texto e materiais (PDF…)"],["link","Material (link)"]].map(function(o){return '<option value="'+o[0]+'"'+((a.tipo||"video")==o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select><label>Link do vídeo ou do material (YouTube, Vimeo, Google Drive ou ficheiro mp4)</label><input data-ce="'+q+'.url" value="'+esc(a.url)+'" placeholder="https://"><label>Duração (opcional)</label><input data-ce="'+q+'.dur" value="'+esc(a.dur)+'" placeholder="12 min"><label>Texto da aula (opcional)</label><textarea rows="4" data-ce="'+q+'.txt">'+esc(a.txt)+'</textarea><label>Materiais de apoio (PDF, imagens, áudio, documentos, até 8 MB cada)</label>'+(a.fs||[]).map(function(f,k){return '<div class="row" style="margin-bottom:6px"><span style="flex:1;min-width:0">📎 '+esc(f.nome)+' <small style="color:var(--m)">('+fsz(f.tam)+')</small></span><button class="btn d sm" data-x="cu.fs.del" data-i="'+i+'" data-j="'+j+'" data-k="'+k+'">Remover</button></div>'}).join("")+'<input type="file" multiple data-cefs="'+i+','+j+'"><p class="hint" id="up_'+i+'_'+j+'"></p>'+'<div class="bar"><button class="btn g sm" data-x="cu.au.up" data-i="'+i+'" data-j="'+j+'">↑</button><button class="btn g sm" data-x="cu.au.dn" data-i="'+i+'" data-j="'+j+'">↓</button><button class="btn d sm" data-x="cu.au.del" data-i="'+i+'" data-j="'+j+'">Apagar aula</button></div></div>'});
 h+='<div class="bar"><button class="btn sm" data-x="cu.au.add" data-i="'+i+'">+ Aula</button><button class="btn g sm" data-x="cu.mod.up" data-i="'+i+'">↑ Módulo</button><button class="btn g sm" data-x="cu.mod.dn" data-i="'+i+'">↓ Módulo</button><button class="btn d sm" data-x="cu.mod.del" data-i="'+i+'">Apagar módulo</button></div></div>'});
 h+='<button class="btn" data-x="cu.mod.add" style="margin-bottom:14px">+ Novo módulo</button><div class="row"><button class="btn" data-x="cu.save">Guardar curso</button>'+(CE.novo?"":'<button class="btn d" data-x="cu.del">Apagar curso</button>')+'</div>';
 b.innerHTML=h;window.scrollTo(0,y)}
-async function cuSave(){if(!CE.t.trim()){alert("Indique o título do curso.");return}
+async function cuSave(silent){if(!CE.t.trim()){alert("Indique o título do curso.");return}
 var na=0;CE.mods.forEach(function(m){na+=(m.aulas||[]).length});
 await FBA.set("cursos",CE.id,{t:CE.t,d:CE.d||"",p:CE.p||"",img:CE.img||"",acesso:CE.acesso||"matricula",pub:CE.pub!==false,ordem:CE.ordem||0,nm:CE.mods.length,na:na});
-await FBA.set("conteudo",CE.id,{mods:CE.mods});CE=null;cur_()}
+await FBA.set("conteudo",CE.id,{mods:CE.mods,sobre:CE.sobre||""});if(silent){CE.novo=false;cue();return}CE=null;cur_()}
+
+function fsz(n){n=+n||0;return n>1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB"}
+async function delF(f){for(var k=0;k<(f.n||0);k++){try{await FBA.del("arquivos",f.id+"_"+k)}catch(e){}}}
+async function delAula(a){for(var k=0;k<(a.fs||[]).length;k++)await delF(a.fs[k])}
+function rb64(f){return new Promise(function(ok,no){var r=new FileReader();r.onload=function(){ok(String(r.result).split(",")[1]||"")};r.onerror=no;r.readAsDataURL(f)})}
+async function upFiles(i,j,files){
+if(!CE.t.trim()){alert("Indique primeiro o título do curso.");return}
+var st=function(t){var n=$("up_"+i+"_"+j);if(n)n.textContent=t},a=CE.mods[i].aulas[j];a.fs=a.fs||[];
+for(var x=0;x<files.length;x++){var f=files[x];
+if(f.size>8*1048576){alert(f.name+" tem mais de 8 MB. Reduza o ficheiro ou use uma ligação (Google Drive).");continue}
+var b=await rb64(f),CH=650000,n=Math.max(1,Math.ceil(b.length/CH)),id="f"+Date.now().toString(36)+nid();
+try{for(var k=0;k<n;k++){st("A enviar "+f.name+" ("+(k+1)+"/"+n+")…");await FBA.set("arquivos",id+"_"+k,{cid:CE.id,fid:id,n:k,d:b.slice(k*CH,(k+1)*CH)})}}
+catch(er){alert("Não foi possível enviar "+f.name+". "+(er.code||er.message));st("");return}
+a.fs.push({id:id,nome:f.name,mime:f.type||"",tam:f.size,n:n})}
+st("");await cuSave(true)}
+
 function mv(a,i,d){var k=i+d;if(k<0||k>=a.length)return;a.splice(k,0,a.splice(i,1)[0])}
 
 /* ===== alunos ===== */
@@ -539,9 +556,9 @@ async function rdr(){var b=$("rd");if(!ready(b))return;b.innerHTML='<p class="hi
 try{RDL=await FBA.list("revendedores");P0=await FBA.get("revenda","precos")}catch(e){b.innerHTML=NOPERM;return}
 var pp=(P0&&P0.p)||{},mn=(P0&&P0.min)||150;RDL.sort(function(a,b){return(a.aprovado?1:0)-(b.aprovado?1:0)||(b.c||0)-(a.c||0)});
 b.innerHTML='<div class="row" style="margin-bottom:10px"><b>'+RDL.length+' revendedores</b><button class="btn g" data-x="rd.ref">Atualizar</button></div>'+
-(RDL.map(function(r){return '<div class="card"><b>'+esc(r.emp||r.n)+'</b> '+(r.aprovado?'<span class="tg" style="background:#d6f1de">Aprovado</span>':'<span class="tg" style="background:#fde7c8">Pendente</span>')+'<br><span style="color:var(--m)">'+esc(r.n)+' · NIF '+esc(r.nif)+' · '+esc(r.t)+' · '+esc(r.e)+'<br>'+esc(r.d)+' · '+esc(r.at)+'</span><div class="bar">'+(r.aprovado?'<button class="btn g sm" data-x="rd.rv" data-id="'+esc(r.id)+'">Revogar</button>':'<button class="btn sm" data-x="rd.ap" data-id="'+esc(r.id)+'">Aprovar</button>')+'</div></div>'}).join("")||'<div class="card">Ainda não há pedidos de revendedor.</div>')+
-'<h3>Preços de revenda</h3><p class="hint">Só os revendedores aprovados veem estes preços. Se deixar um preço em branco, o revendedor paga o preço normal desse artigo.</p><div class="card"><label>Encomenda mínima (€)</label><input id="rmin" inputmode="decimal" value="'+esc(mn)+'"><label>Desconto sobre o preço normal (%)</label><div class="row"><input id="rdesc" inputmode="decimal" placeholder="por exemplo 25"><button class="btn g" data-x="rd.apl">Aplicar a todos</button></div></div><div class="card">'+
-D.prod.map(function(p){return '<div class="row" style="margin-bottom:8px"><span style="flex:1;min-width:0">'+esc(p.n)+'<br><small style="color:var(--m)">Normal '+eur(p.p)+'</small></span><input data-rpid="'+esc(p.id)+'" data-np="'+p.p+'" inputmode="decimal" style="width:110px" value="'+(pp[p.id]!=null?esc(pp[p.id]):"")+'" placeholder="€"></div>'}).join("")+'</div><button class="btn" data-x="rd.save">Guardar preços de revenda</button>'}
+(RDL.map(function(r){return '<div class="card"><b>'+esc(r.emp||r.n)+'</b> '+(r.aprovado?'<span class="tg" style="background:#d6f1de">Aprovado</span>':'<span class="tg" style="background:#fde7c8">Pendente</span>')+'<br><span style="color:var(--m)">'+esc(r.n)+' · NIF '+esc(r.nif)+' · '+esc(r.t)+' · '+esc(r.e)+'<br>'+esc(r.d)+' · '+esc(r.at)+'</span><div class="bar">'+(!can("rev_aprovar")?"":r.aprovado?'<button class="btn g sm" data-x="rd.rv" data-id="'+esc(r.id)+'">Revogar</button>':'<button class="btn sm" data-x="rd.ap" data-id="'+esc(r.id)+'">Aprovar</button>')+'</div></div>'}).join("")||'<div class="card">Ainda não há pedidos de revendedor.</div>')+
+(can("rev_precos")?'<h3>Preços de revenda</h3><p class="hint">Só os revendedores aprovados veem estes preços. Se deixar um preço em branco, o revendedor paga o preço normal desse artigo.</p><div class="card"><label>Encomenda mínima (€)</label><input id="rmin" inputmode="decimal" value="'+esc(mn)+'"><label>Desconto sobre o preço normal (%)</label><div class="row"><input id="rdesc" inputmode="decimal" placeholder="por exemplo 25"><button class="btn g" data-x="rd.apl">Aplicar a todos</button></div></div><div class="card">'+
+D.prod.map(function(p){return '<div class="row" style="margin-bottom:8px"><span style="flex:1;min-width:0">'+esc(p.n)+'<br><small style="color:var(--m)">Normal '+eur(p.p)+'</small></span><input data-rpid="'+esc(p.id)+'" data-np="'+p.p+'" inputmode="decimal" style="width:110px" value="'+(pp[p.id]!=null?esc(pp[p.id]):"")+'" placeholder="€"></div>'}).join("")+'</div><button class="btn" data-x="rd.save">Guardar preços de revenda</button>':"")}
 function num(v){v=String(v).trim().replace(",",".");var n=parseFloat(v);return isNaN(n)?null:n}
 
 /* ===== textos de todo o site ===== */
@@ -568,6 +585,7 @@ document.addEventListener("change",async function(e){var t=e.target;if(!t.datase
 if(t.dataset.ce!=null&&CE)spo(CE,t.dataset.ce,t.type=="checkbox"?t.checked:t.value);
 if(t.dataset.ceimg!=null&&t.files&&t.files[0])rz(t.files[0],function(u){CE.img=u;cue()},700,.72);
 if(t.dataset.co){try{await coSave(t.dataset.id)}catch(x){alert("Não foi possível guardar.")}}
+if(t.dataset.cefs&&t.files&&t.files.length&&CE){var ij=t.dataset.cefs.split(",");try{await upFiles(+ij[0],+ij[1],Array.prototype.slice.call(t.files))}catch(x){alert("Erro: "+(x.code||x.message))}}
 if(t.dataset.oid){try{await FBA.set("pedidos",t.dataset.oid,{estado:t.value},1)}catch(x){alert("Não foi possível atualizar o estado.")}}
 if(t.dataset.mat){var uid=t.dataset.mat,arr=[];Array.prototype.forEach.call(document.querySelectorAll('[data-mat="'+uid+'"]'),function(c){if(c.checked)arr.push(c.value)});try{await FBA.set("alunos",uid,{mat:arr},1)}catch(x){alert("Não foi possível guardar a matrícula.");t.checked=!t.checked}}});
 document.addEventListener("click",async function(e){var t=e.target.closest("[data-x]");if(!t)return;var x=t.dataset.x,i=+t.dataset.i,j=+t.dataset.j;
@@ -581,44 +599,56 @@ else if(x=="cu.rmimg"){CE.img="";cue()}
 else if(x=="cu.mod.add"){CE.mods.push({id:"m"+nid(),t:"",aulas:[]});cue()}
 else if(x=="cu.mod.up"){mv(CE.mods,i,-1);cue()}
 else if(x=="cu.mod.dn"){mv(CE.mods,i,1);cue()}
-else if(x=="cu.mod.del"){if(confirm("Apagar este módulo e as suas aulas?")){CE.mods.splice(i,1);cue()}}
+else if(x=="cu.mod.del"){if(confirm("Apagar este módulo, as suas aulas e materiais?")){var ms=CE.mods[i].aulas||[];for(var q=0;q<ms.length;q++)await delAula(ms[q]);CE.mods.splice(i,1);if(!CE.novo)await cuSave(true);else cue()}}
 else if(x=="cu.au.add"){(CE.mods[i].aulas=CE.mods[i].aulas||[]).push({id:"a"+nid(),t:"",tipo:"video",url:"",dur:"",txt:""});cue()}
 else if(x=="cu.au.up"){mv(CE.mods[i].aulas,j,-1);cue()}
 else if(x=="cu.au.dn"){mv(CE.mods[i].aulas,j,1);cue()}
-else if(x=="cu.au.del"){CE.mods[i].aulas.splice(j,1);cue()}
+else if(x=="cu.au.del"){if(confirm("Apagar esta aula e os seus materiais?")){await delAula(CE.mods[i].aulas[j]);CE.mods[i].aulas.splice(j,1);if(!CE.novo)await cuSave(true);else cue()}}
+else if(x=="cu.fs.del"){if(confirm("Remover este material?")){var a_=CE.mods[i].aulas[j];await delF(a_.fs[+t.dataset.k]);a_.fs.splice(+t.dataset.k,1);await cuSave(true)}}
 else if(x=="cu.save")await cuSave();
-else if(x=="cu.del"){if(confirm("Apagar este curso? As matrículas e o progresso dos alunos deixam de funcionar.")){await FBA.del("conteudo",CE.id);await FBA.del("cursos",CE.id);CE=null;cur_()}}
+else if(x=="cu.del"){if(confirm("Apagar este curso? As matrículas e o progresso dos alunos deixam de funcionar.")){for(var m1=0;m1<CE.mods.length;m1++)for(var a1=0;a1<(CE.mods[m1].aulas||[]).length;a1++)await delAula(CE.mods[m1].aulas[a1]);await FBA.del("conteudo",CE.id);await FBA.del("cursos",CE.id);CE=null;cur_()}}
 else if(x=="al.ref")alr();
 else if(x=="rd.ref")rdr();
 else if(x=="pc.save")await pcSave();
+else if(x=="eq.new")await eqNew();
 else if(x=="eq.del"){if(confirm("Remover este colaborador?")){await FBA.del("colaboradores",t.dataset.id);eqr()}}
 else if(x=="rd.ap"||x=="rd.rv"){await FBA.set("revendedores",t.dataset.id,{aprovado:x=="rd.ap"},1);rdr()}
 else if(x=="rd.apl"){var d=num($("rdesc").value);if(d==null||d<0||d>95){alert("Indique um desconto entre 0 e 95.");return}Array.prototype.forEach.call(document.querySelectorAll("[data-rpid]"),function(n){n.value=(parseFloat(n.dataset.np)*(1-d/100)).toFixed(2)})}
 else if(x=="rd.save"){var pm={};Array.prototype.forEach.call(document.querySelectorAll("[data-rpid]"),function(n){var v=num(n.value);if(v!=null&&v>=0)pm[n.dataset.rpid]=v});var mn=num($("rmin").value);await FBA.set("revenda","precos",{p:pm,min:mn==null?150:mn});alert("Preços de revenda guardados.")}
 }catch(er){alert("Erro: "+(er.code||er.message))}});
 /* ===== equipa (colaboradores) e precos ===== */
-var WHO={t:"?",perm:{}};
+var WHO={t:"?",perm:{}},EQMSG="";
+var PERMS=[["ped_ver","Ver pedidos"],["ped_estado","Mudar o estado dos pedidos"],["precos","Alterar preços, descontos e artigos esgotados"],["rev_precos","Alterar preços de revenda"],["rev_aprovar","Aprovar revendedores"],["cursos","Gerir cursos, aulas e materiais"],["alunos","Ver alunos e atribuir matrículas"]];
+var TABP={od:["ped_ver","ped_estado"],pc:["precos","rev_precos"],rd:["rev_aprovar","rev_precos"],cu:["cursos"],al:["alunos"]};
+function can(k){return WHO.t!="col"||!!WHO.perm[k]}
 async function who(){var u=window.FBA&&FBA.user();if(!u){WHO={t:"?",perm:{}};navu();return}
 try{await FBA.list("colaboradores");WHO={t:"dono",perm:{}}}catch(e){var c=null;try{c=await FBA.get("colaboradores",u.uid)}catch(x){}WHO=c&&c.ativo?{t:"col",perm:c.perm||{}}:{t:"nenhum",perm:{}}}
 navu()}
-function navu(){var first=null,ok=false;Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){var v=b.dataset.v,show=true;if(WHO.t=="col")show=(v=="od"&&!!WHO.perm.pedidos)||(v=="pc"&&!!WHO.perm.precos);b.style.display=show?"":"none";if(show&&!first)first=b;if(show&&v==CURV)ok=true});
+function navu(){var first=null,ok=false;Array.prototype.forEach.call(document.querySelectorAll("nav button"),function(b){var v=b.dataset.v,show=true;if(WHO.t=="col")show=!!TABP[v]&&TABP[v].some(function(k){return !!WHO.perm[k]});b.style.display=show?"":"none";if(show&&!first)first=b;if(show&&v==CURV)ok=true});
 if(WHO.t=="col"&&!ok&&first)first.click()}
 async function eqr(){var b=$("eq");if(!ready(b))return;b.innerHTML='<p class="hint">A carregar…</p>';var L;
 try{L=await FBA.list("colaboradores")}catch(e){b.innerHTML=NOPERM;return}
-b.innerHTML='<p class="hint">O colaborador pede acesso na conta dele (menu da conta, "Pedir acesso de colaborador"). Aqui ativa-o e escolhe o que pode fazer. O colaborador nunca vê as definições, o token do GitHub nem as contas dos outros.</p>'+
-(L.map(function(c){var p=c.perm||{},i=esc(c.id);return '<div class="card"><b>'+esc(c.n||c.e)+'</b> <span class="tg" style="background:'+(c.ativo?"#d6f1de":"#fde7c8")+'">'+(c.ativo?"Ativo":"Pendente")+'</span><br><span style="color:var(--m)">'+esc(c.e)+'</span>'+
-'<label class="ck"><input type="checkbox" data-co="ativo" data-id="'+i+'"'+(c.ativo?" checked":"")+'> Ativo</label>'+
-'<label class="ck"><input type="checkbox" data-co="pedidos" data-id="'+i+'"'+(p.pedidos?" checked":"")+'> Ver pedidos e mudar o estado</label>'+
-'<label class="ck"><input type="checkbox" data-co="precos" data-id="'+i+'"'+(p.precos?" checked":"")+'> Alterar preços, descontos, preços de revenda e esgotados</label>'+
-'<div class="bar"><button class="btn d sm" data-x="eq.del" data-id="'+i+'">Remover colaborador</button></div></div>'}).join("")||'<div class="card">Ainda não há colaboradores.</div>')}
-async function coSave(id){var q=function(k){var n=document.querySelector('[data-co="'+k+'"][data-id="'+id+'"]');return !!(n&&n.checked)};
-await FBA.set("colaboradores",id,{ativo:q("ativo"),perm:{pedidos:q("pedidos"),precos:q("precos")}},1);eqr()}
+var pk=function(id,p,pre){return PERMS.map(function(x){return '<label class="ck"><input type="checkbox" '+(pre?'id="'+pre+x[0]+'"':'data-co="'+x[0]+'" data-id="'+id+'"')+((p&&p[x[0]])?" checked":"")+'> '+x[1]+'</label>'}).join("")};
+b.innerHTML=(EQMSG?'<div class="card" style="border-left:4px solid #1a8a4a"><b>Acesso criado</b><p class="hint">Envie esta mensagem ao colaborador:</p><textarea rows="5" readonly onclick="this.select()">'+esc(EQMSG)+'</textarea></div>':'')+
+'<p class="hint">Cria aqui as contas da equipa e escolhe o que cada pessoa pode fazer. Os colaboradores entram em oduose.pt/admin.html com o utilizador e a palavra-passe que lhes enviar. Produtos, Banners, Textos, Definições e Publicar são só do dono.</p>'+
+'<details class="card"><summary><b>+ Criar acesso de colaborador</b></summary><label>Nome</label><input id="cn_n" placeholder="Ana Silva"><label>Nome de utilizador (ou e-mail)</label><input id="cn_u" autocapitalize="off" placeholder="ana"><label>Palavra-passe (mínimo 6 caracteres)</label><input id="cn_p" placeholder="escolha uma palavra-passe"><label>O que pode fazer</label>'+pk("",{},"cn_k_")+'<button class="btn" data-x="eq.new" style="margin-top:10px">Criar acesso</button></details>'+
+(L.map(function(c){var i=esc(c.id);return '<div class="card"><b>'+esc(c.n||c.u||c.e)+'</b> <span class="tg" style="background:'+(c.ativo?"#d6f1de":"#fde7c8")+'">'+(c.ativo?"Ativo":"Suspenso")+'</span><br><span style="color:var(--m)">Utilizador: '+esc(c.u||c.e)+'</span><label class="ck"><input type="checkbox" data-co="ativo" data-id="'+i+'"'+(c.ativo?" checked":"")+'> Acesso ativo</label>'+pk(i,c.perm||{})+'<div class="bar"><button class="btn d sm" data-x="eq.del" data-id="'+i+'">Remover acesso</button></div></div>'}).join("")||'<div class="card">Ainda não há colaboradores.</div>')}
+async function eqNew(){var n=$("cn_n").value.trim(),u=$("cn_u").value.trim(),p=$("cn_p").value;
+if(!n||!u){alert("Indique o nome e o nome de utilizador.");return}
+if(p.length<6){alert("A palavra-passe precisa de pelo menos 6 caracteres.");return}
+var em=unm(u);if(em.indexOf("@")<1||em.charAt(0)=="@"){alert("Nome de utilizador inválido.");return}
+var perm={};PERMS.forEach(function(x){perm[x[0]]=!!$("cn_k_"+x[0]).checked});
+var uid;try{uid=await FBA.novoUser(em,p,n)}catch(er){alert(er.code=="auth/email-already-in-use"?"Já existe uma conta com esse utilizador. Escolha outro nome de utilizador.":"Não foi possível criar a conta: "+(er.code||er.message));return}
+await FBA.set("colaboradores",uid,{n:n,u:u,e:em,ativo:true,perm:perm,c:Date.now()});
+EQMSG="Olá "+n+"! O seu acesso ao painel da OduOse:\nEndereço: "+location.origin+location.pathname.replace(/[^\/]*$/,"")+"admin.html\nUtilizador: "+u+"\nPalavra-passe: "+p;eqr()}
+async function coSave(id){var q=function(k){var n=document.querySelector('[data-co="'+k+'"][data-id="'+id+'"]');return !!(n&&n.checked)},perm={};
+PERMS.forEach(function(x){perm[x[0]]=q(x[0])});await FBA.set("colaboradores",id,{ativo:q("ativo"),perm:perm},1)}
 async function prr(){var b=$("pc");if(!ready(b))return;b.innerHTML='<p class="hint">A carregar…</p>';var o=null,r=null;
 try{o=await FBA.get("precos","atual")}catch(e){}
 try{r=await FBA.get("revenda","precos")}catch(e){}
-o=o||{};var op=o.p||{},oc=o.pc||{},oe=o.esg||{},rp=(r&&r.p)||{};
+o=o||{};var DP=can("precos")?"":" disabled",DR=can("rev_precos")?"":" disabled";var op=o.p||{},oc=o.pc||{},oe=o.esg||{},rp=(r&&r.p)||{};
 b.innerHTML='<p class="hint">Altere preços, descontos, preços de revenda e artigos esgotados. Estes valores passam a ter prioridade sobre os do separador Produtos e aparecem no site logo depois de guardar.</p><input id="pq" placeholder="Procurar artigo…" style="margin-bottom:10px"><div id="plist">'+
-D.prod.map(function(p){var k=p.id;return '<div class="card" data-s="'+esc((p.n+" "+p.t).toLowerCase())+'"><b>'+esc(p.n)+'</b> <small style="color:var(--m)">'+esc(p.t)+'</small><div class="row"><div style="flex:1"><label>Preço (€)</label><input data-pp="'+k+'" inputmode="decimal" value="'+esc(op[k]!=null?op[k]:p.p)+'"></div><div style="flex:1"><label>Desconto (%)</label><input data-pd="'+k+'" inputmode="decimal" value="'+esc(oc[k]!=null?oc[k]:(p.pc||0))+'"></div><div style="flex:1"><label>Revenda (€)</label><input data-pr="'+k+'" inputmode="decimal" value="'+esc(rp[k]!=null?rp[k]:"")+'" placeholder="normal"></div></div><label class="ck"><input type="checkbox" data-pe="'+k+'"'+((oe[k]!=null?oe[k]:p.esg)?" checked":"")+'> Esgotado</label></div>'}).join("")+'</div><button class="btn" data-x="pc.save">Guardar valores</button>';
+D.prod.map(function(p){var k=p.id;return '<div class="card" data-s="'+esc((p.n+" "+p.t).toLowerCase())+'"><b>'+esc(p.n)+'</b> <small style="color:var(--m)">'+esc(p.t)+'</small><div class="row"><div style="flex:1"><label>Preço (€)</label><input data-pp="'+k+'"'+DP+' inputmode="decimal" value="'+esc(op[k]!=null?op[k]:p.p)+'"></div><div style="flex:1"><label>Desconto (%)</label><input data-pd="'+k+'"'+DP+' inputmode="decimal" value="'+esc(oc[k]!=null?oc[k]:(p.pc||0))+'"></div><div style="flex:1"><label>Revenda (€)</label><input data-pr="'+k+'"'+DR+' inputmode="decimal" value="'+esc(rp[k]!=null?rp[k]:"")+'" placeholder="normal"></div></div><label class="ck"><input type="checkbox" data-pe="'+k+'"'+DP+((oe[k]!=null?oe[k]:p.esg)?" checked":"")+'> Esgotado</label></div>'}).join("")+'</div><button class="btn" data-x="pc.save">Guardar valores</button>';
 PRC={rev:r}}
 var PRC=null;
 async function pcSave(){var P_={},D_={},E_={},R_={},bad=0;
@@ -627,9 +657,9 @@ Array.prototype.forEach.call(document.querySelectorAll("[data-pd]"),function(n){
 Array.prototype.forEach.call(document.querySelectorAll("[data-pr]"),function(n){var v=num(n.value);if(v!=null&&v>=0)R_[n.dataset.pr]=v});
 Array.prototype.forEach.call(document.querySelectorAll("[data-pe]"),function(n){E_[n.dataset.pe]=n.checked});
 if(bad){alert("Há valores inválidos. Use números (preço positivo, desconto entre 0 e 95).");return}
-await FBA.set("precos","atual",{p:P_,pc:D_,esg:E_});
+if(can("precos"))await FBA.set("precos","atual",{p:P_,pc:D_,esg:E_});
 var mn=(PRC&&PRC.rev&&PRC.rev.min)||150;
-try{await FBA.set("revenda","precos",{p:R_,min:mn})}catch(e){alert("Preços normais guardados, mas não foi possível guardar os de revenda.");return}
+if(can("rev_precos"))try{await FBA.set("revenda","precos",{p:R_,min:mn})}catch(e){alert("Preços normais guardados, mas não foi possível guardar os de revenda.");return}
 alert("Guardado. O site mostra os novos valores logo.")}
 window.odr=async function(){await who();if(CURV=="od")od();if(CURV=="cu")cur_();if(CURV=="al")alr();if(CURV=="rd")rdr();if(CURV=="pc")prr();if(CURV=="eq")eqr()};
 
@@ -645,6 +675,7 @@ window.FBA={user:()=>auth.currentUser,login:(e,p)=>AU.signInWithEmailAndPassword
 get:async(c,i)=>{const s=await FS.getDoc(FS.doc(db,c,i));return s.exists()?s.data():null},
 set:(c,i,o,m)=>m?FS.setDoc(FS.doc(db,c,i),o,{merge:true}):FS.setDoc(FS.doc(db,c,i),o),
 del:(c,i)=>FS.deleteDoc(FS.doc(db,c,i)),
+novoUser:async(e,p,n)=>{const s=A.initializeApp(C,"sec"+Date.now());try{const a2=AU.getAuth(s);const r=await AU.createUserWithEmailAndPassword(a2,e,p);try{await AU.updateProfile(r.user,{displayName:n})}catch(x){}const id=r.user.uid;await AU.signOut(a2);return id}finally{try{await A.deleteApp(s)}catch(x){}}},
 list:async(c)=>{const s=await FS.getDocs(FS.collection(db,c));return s.docs.map(d=>Object.assign({id:d.id},d.data()))}};
 AU.onAuthStateChanged(auth,()=>{if(window.odr)window.odr()});
 }catch(e){console.error(e)}}
