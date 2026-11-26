@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 38,
+   "n": "Esan Egungun 45 cm",
+   "t": "Ifá",
+   "ty": "Imagens",
+   "d": "Esan Egungun 45 cm",
+   "p": 150,
+   "pc": 0,
+   "nv": true,
+   "esg": true,
+   "img": "fotos/p38-1795701397282.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 37,
    "n": "Banha de Ori",
    "t": "Candomblé",
