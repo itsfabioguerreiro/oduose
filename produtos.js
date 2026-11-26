@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 40,
+   "n": "Azougue Capsula",
+   "t": "Candomblé",
+   "ty": "Ferramentas",
+   "d": "Azougue em capsula",
+   "p": 3,
+   "pc": 0,
+   "nv": true,
+   "esg": true,
+   "img": "fotos/p40-1795714099310.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 39,
    "n": "Yangui",
    "t": "Ifá",
