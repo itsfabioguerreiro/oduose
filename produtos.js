@@ -210,7 +210,7 @@ window.DADOS={
    "pc": 15,
    "nv": true,
    "esg": false,
-   "img": "fotos/p12-1795690804601.jpg",
+   "img": "fotos/p12-1795690962745.jpg",
    "k": "chain",
    "a": "#2E7D5B",
    "c": "#d4e8dc"
