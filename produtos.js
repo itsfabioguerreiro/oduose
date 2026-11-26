@@ -21,6 +21,36 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 29,
+   "n": "Pingente Espelho Luxo",
+   "t": "Umbanda",
+   "ty": "Guias e pulseiras",
+   "d": "Pingente Espelho Luxo\nPrateado / Dourado",
+   "p": 3.25,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p29-1795695687147.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
+   "id": 28,
+   "n": "Pingente Maria Padilha",
+   "t": "Umbanda",
+   "ty": "Guias e pulseiras",
+   "d": "Pingente Maria Padilha\nPrateado / Dourado",
+   "p": 3.2,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p28-1795695690328.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 27,
    "n": "Brajá Búzios Terra",
    "t": "Umbanda",
