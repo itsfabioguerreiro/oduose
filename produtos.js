@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 39,
+   "n": "Yangui",
+   "t": "Ifá",
+   "ty": "Banhos e perfumes",
+   "d": "Pedra Yangui - Esu\n\nValor a partir de:",
+   "p": 4.95,
+   "pc": 0,
+   "nv": true,
+   "esg": true,
+   "img": "fotos/p39-1795703364145.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 38,
    "n": "Esan Egungun 45 cm",
    "t": "Ifá",
