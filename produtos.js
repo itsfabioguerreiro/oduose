@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 58,
+   "n": "Oga - Camaleão",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "Oga - Camaleão seco",
+   "p": 28,
+   "pc": 0,
+   "nv": false,
+   "esg": true,
+   "img": "fotos/p58-1795814450646.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 57,
    "n": "Eku - Rato Pequeno",
    "t": "Ifá",
