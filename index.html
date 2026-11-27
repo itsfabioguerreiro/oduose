@@ -4,8 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OduOse – Artigos de Umbanda, Candomblé e Ifá</title>
 <meta name="description" content="OduOse: loja online de artigos de Umbanda, Candomblé e Ifá. Guias, velas, ferramentas, imagens, ervas e jogos de adivinhação. Importação e exportação direta do Brasil e da Nigéria. Revenda a partir de 150 €.">
-<meta property="og:title" content="OduOse – Artigos de Umbanda, Candomblé e Ifá"><meta property="og:description" content="Guias, velas, ferramentas, imagens, ervas e jogos de adivinhação."><meta property="og:type" content="website"><meta name="theme-color" content="#2a7fb8">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Marcellus&display=swap" rel="stylesheet">
+<meta property="og:title" content="OduOse – Artigos de Umbanda, Candomblé e Ifá"><meta property="og:description" content="Guias, velas, ferramentas, imagens, ervas e jogos de adivinhação."><meta property="og:type" content="website"><meta name="theme-color" content="#1c1630">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fff;--grey:#f1f1f1;--text:#333;--mut:#777;--line:#e4e4e4;--lk:#1b8fd1;--bl:#2a7fb8;--bl2:#0d4f8b;--sb:#0a84d6;--rd:#d93636;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -110,6 +110,39 @@ footer a{color:#fff;display:block;margin-bottom:3px;font-size:.88rem;text-underl
 #pnb{position:fixed;left:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;background:#16294d;color:#fff;border:0;border-radius:99px;padding:12px 18px;font:500 1rem Roboto;cursor:pointer;display:none;align-items:center;box-shadow:0 4px 14px #0005}
 #pn{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;background:var(--bg)}#pn.open{display:flex}#pn iframe{flex:1;border:0;width:100%;background:#fff}
 .pls details summary{cursor:pointer;list-style:none}.pls details summary::-webkit-details-marker{display:none}.pls .mh{display:flex;justify-content:space-between;gap:8px}.fl{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;flex-wrap:wrap}.fv img{max-width:100%;border-radius:8px}.fv iframe{width:100%;height:70vh;border:1px solid var(--line);border-radius:8px}
+
+/* ===== TEMA NOITE E OURO ===== */
+:root{--bg:#fbf8f2;--grey:#f3ecdf;--text:#241d33;--mut:#6d6478;--line:#e6dccb;--lk:#4b2f8f;--bl:#2b1f4d;--bl2:#1c1630;--sb:#4b2f8f;--rd:#b3472f;--ouro:#c9973a;--serif:'Cormorant Garamond',Georgia,serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15101f;--grey:#1f1830;--text:#f2ece0;--mut:#b5abc6;--line:#352c4a;--lk:#e4be6d;--sb:#d7a94b;--bl:#1c1630;--bl2:#0e0a17}:root:not([data-theme="light"]) .btn{color:#1c1630}:root:not([data-theme="light"]) .add:hover{color:#1c1630}}
+:root[data-theme="dark"]{--bg:#15101f;--grey:#1f1830;--text:#f2ece0;--mut:#b5abc6;--line:#352c4a;--lk:#e4be6d;--sb:#d7a94b;--bl:#1c1630;--bl2:#0e0a17}
+body{font-family:Roboto,system-ui,sans-serif;letter-spacing:.005em}
+::selection{background:var(--ouro);color:#1c1630}
+header{background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:0 2px 14px #1c163014}
+.logo{font-family:var(--serif)!important;font-weight:700!important;letter-spacing:.06em;color:var(--sb)!important}
+.info{background:radial-gradient(120% 140% at 85% 0%,#5a3fa0 0%,#2b1f4d 45%,#1c1630 100%);padding:40px 0;border-bottom:2px solid var(--ouro)}
+.info h2{font:600 2.5rem/1.1 var(--serif)!important;color:#f3d98f}.info p{opacity:.92}
+.rv{background:linear-gradient(120deg,#1c1630,#3b2a6b);border-bottom:1px solid #c9973a55}.rv b{font:600 1.7rem var(--serif)!important;color:#f3d98f}.rv p{color:#d9d0ea}
+.slide{border-radius:20px!important;box-shadow:0 14px 34px #1c163040}.cap{font-family:var(--serif)!important;font-weight:600;font-size:1.3rem;background:#1c1630d9;border:1px solid #c9973a88;color:#f3d98f}
+.bn{border-radius:18px;overflow:hidden;box-shadow:0 8px 24px #1c163026;transition:transform .2s}.bn:hover{transform:translateY(-2px)}
+.b1t{background:linear-gradient(120deg,#1c1630,#3b2a6b)!important;color:#f3d98f!important;font-family:var(--serif)!important;letter-spacing:.14em;font-weight:700}
+.b2{background:linear-gradient(120deg,#f3ecdf,#fbf8f2)}.b3{border-top-color:var(--ouro)!important}
+h2.st{font:600 2.4rem var(--serif)!important;color:var(--text)!important;text-align:center;margin:48px 0 24px}
+h2.st::after{content:"";display:block;width:60px;height:2px;background:var(--ouro);margin:10px auto 0}
+.pc{background:var(--grey);border-radius:18px;padding:10px 10px 16px;transition:transform .2s,box-shadow .2s;border:1px solid var(--line)}
+.pc:hover{transform:translateY(-4px);box-shadow:0 14px 30px #1c163026}
+.th{border-radius:14px}.bd{background:var(--rd)!important;border-radius:999px;font-weight:700}
+.cl{color:#a77b24;letter-spacing:.1em;font-weight:500}
+.pc h3{font:600 1.3rem/1.25 var(--serif)!important;color:var(--text)!important}
+.pr{font:700 1.6rem var(--serif)!important;color:var(--sb)}.pr s{font-weight:500}
+.add{border-radius:999px;border-width:1.5px;font-weight:500;letter-spacing:.03em}
+.btn{background:linear-gradient(135deg,#3b2a6b,#5a3fa0);box-shadow:0 4px 14px #4b2f8f40;letter-spacing:.02em;transition:transform .15s}.btn:hover{transform:translateY(-1px)}
+:root:not([data-theme="light"]) .btn{background:linear-gradient(135deg,#c9973a,#e6c26a)}
+.cta2>div{background:var(--grey);border:1px solid var(--line);border-radius:20px;border-top:3px solid var(--ouro)}.cta2 h3{font:600 1.7rem var(--serif)!important}
+.txt h3,.lb h2,.lb h3{font-family:var(--serif)!important;font-weight:700}.lb{border-radius:20px}
+#dr,#ac{border-radius:20px 0 0 20px}#mn .pn .ac{color:var(--sb)}#mn .pn a,#mn .pn button.it{font-family:var(--serif);font-size:1.3rem;font-weight:600}
+footer{background:linear-gradient(180deg,#1c1630,#0e0a17);border-top:3px solid var(--ouro)}footer h4{font:600 1.2rem var(--serif);color:#f3d98f}.cp{background:#0a0711}
+.wa{background:#1fa855!important}
+.ccd{border-radius:18px}.pg i{background:var(--ouro)}.cs-h h2{font-family:var(--serif)!important;font-weight:700}
 </style></head><body>
 <header><div class="w"><button class="ic" id="mo" aria-label="Abrir menu"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
 <a class="logo" href="#">Odu<i>Ose</i></a>
