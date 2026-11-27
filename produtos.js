@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 55,
+   "n": "Esu Alaje 40 cm",
+   "t": "Ifá",
+   "ty": "Imagens",
+   "d": "Material: Madeira africana\nTamanho: 40 cm.",
+   "p": 299,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p55-1795811279295.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 54,
    "n": "Ile Ori - Azul/Amarelo",
    "t": "Ifá",
