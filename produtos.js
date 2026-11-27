@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 56,
+   "n": "Ejá - Peixe Seco",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "Peixe seco / Eja Ifa",
+   "p": 55,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p56-1795811657257.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 55,
    "n": "Esu Alaje 40 cm",
    "t": "Ifá",
