@@ -672,7 +672,7 @@ window.DADOS={
     ],
     "bg": "#4a3a2a,#2a2a1f",
     "f": "Adivinhação",
-    "img": ""
+    "img": "fotos/b-s2-1795804955858.jpg"
    }
   ],
   "b1": {
