@@ -619,7 +619,7 @@ window.DADOS={
    "t": "CURSOS E WORKSHOPS",
    "s": "Conhecimento....",
    "x": "Fundamento e tradição para si e para quem o rodeia",
-   "f": "Amuletos e cristais",
+   "f": "Todos",
    "img": ""
   },
   "b2": {
@@ -631,7 +631,7 @@ window.DADOS={
   "b3": {
    "t": "AS FAMOSAS FERRAMENTAS DE ORIXÁ",
    "f": "Ferramentas",
-   "img": ""
+   "img": "fotos/b-b3-1795802155309.jpg"
   },
   "ui": {
    "m_inicio": "Início",
