@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 57,
+   "n": "Eku - Rato Pequeno",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "Eku Ifa - Rato seco Pequeno.",
+   "p": 32,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p57-1795812614216.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 56,
    "n": "Ejá - Peixe Seco",
    "t": "Ifá",
