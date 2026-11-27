@@ -21,6 +21,36 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 54,
+   "n": "Ile Ori - Azul/Amarelo",
+   "t": "Ifá",
+   "ty": "Adivinhação",
+   "d": "Ile Ori completo.",
+   "p": 135,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p54-1795810909334.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
+   "id": 53,
+   "n": "Ose Funfun - Aprox. 40gr",
+   "t": "Ifá",
+   "ty": "Banhos e perfumes",
+   "d": "Ose Funfun - Aprox. 40gr",
+   "p": 8,
+   "pc": 0,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p53-1795810912352.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 52,
    "n": "Buzio Gema 50gr",
    "t": "Umbanda",
