@@ -21,6 +21,21 @@ window.DADOS={
  },
  "prod": [
   {
+   "id": 49,
+   "n": "Vela - Amarração",
+   "t": "Umbanda",
+   "ty": "Velas e ervas",
+   "d": "Vela - Amarração Vermelha",
+   "p": 7.99,
+   "pc": 10,
+   "nv": true,
+   "esg": false,
+   "img": "fotos/p49-1795804160215.jpg",
+   "k": "box",
+   "a": "#8c7bf0",
+   "c": "#e6e0f5"
+  },
+  {
    "id": 48,
    "n": "Lelecum 10g",
    "t": "Umbanda",
